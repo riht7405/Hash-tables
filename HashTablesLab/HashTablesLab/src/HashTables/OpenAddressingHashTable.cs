@@ -1,8 +1,6 @@
 using HashTablesLab.Core.Interfaces;
-using HashTablesLab.Core.Models;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace HashTablesLab.HashTables
 {
@@ -12,7 +10,9 @@ namespace HashTablesLab.HashTables
         private readonly IHashFunction<TKey> _hashFunction;
         private readonly ICollisionResolver _resolver;
         private int _count;
-        private readonly Stopwatch _timer;
+        private int _collisionCount;
+        private int _probeCount;
+        private int _totalInsertionTimeMs;
 
         private class Entry
         {
@@ -41,8 +41,10 @@ namespace HashTablesLab.HashTables
             _table = new Entry[size];
             _hashFunction = hashFunction;
             _resolver = resolver;
-            _timer = new Stopwatch();
             _count = 0;
+            _collisionCount = 0;
+            _probeCount = 0;
+            _totalInsertionTimeMs = 0;
         }
 
         public double LoadFactor => (double)_count / _table.Length;
@@ -50,32 +52,48 @@ namespace HashTablesLab.HashTables
 
         public bool Insert(TKey key, TValue value)
         {
-            _timer.Start();
+            var watch = System.Diagnostics.Stopwatch.StartNew();
 
-            if (_count >= _table.Length * 0.75)
-                throw new InvalidOperationException("Таблица близка к переполнению");
+            // Убираем ограничение 75% для возможности заполнения таблицы
+            if (_count >= _table.Length)
+            {
+                watch.Stop();
+                throw new InvalidOperationException("Таблица переполнена");
+            }
 
             for (int i = 0; i < _table.Length; i++)
             {
                 int index = _resolver.Resolve(_hashFunction.Calculate(key, _table.Length), i, _table.Length);
 
-                if (_table[index] == null || _table[index].Status == EntryStatus.Deleted)
+                // Считаем пробу
+                _probeCount++;
+
+                if (_table[index] == null || _table[index].Status == EntryStatus.Empty ||
+                    _table[index].Status == EntryStatus.Deleted)
                 {
                     _table[index] = new Entry(key, value);
                     _count++;
-                    _timer.Stop();
+
+                    watch.Stop();
+                    _totalInsertionTimeMs += (int)watch.ElapsedMilliseconds;
                     return true;
                 }
 
                 if (_table[index].Status == EntryStatus.Occupied &&
                     EqualityComparer<TKey>.Default.Equals(_table[index].Key, key))
                 {
-                    _timer.Stop();
-                    return false;
+                    watch.Stop();
+                    _totalInsertionTimeMs += (int)watch.ElapsedMilliseconds;
+                    return false; // Ключ уже существует
                 }
+
+                // Коллизия при попытке вставки
+                if (i > 0)
+                    _collisionCount++;
             }
 
-            _timer.Stop();
+            watch.Stop();
+            _totalInsertionTimeMs += (int)watch.ElapsedMilliseconds;
             throw new InvalidOperationException("Не удалось найти свободную ячейку");
         }
 
@@ -94,6 +112,8 @@ namespace HashTablesLab.HashTables
                     value = _table[index].Value;
                     return true;
                 }
+
+                _probeCount++;
             }
 
             value = default;
@@ -123,10 +143,11 @@ namespace HashTablesLab.HashTables
 
         public void Clear()
         {
-            for (int i = 0; i < _table.Length; i++)
-                _table[i] = new Entry(default, default) { Status = EntryStatus.Empty };
+            Array.Clear(_table, 0, _table.Length);
             _count = 0;
-            _timer.Reset();
+            _collisionCount = 0;
+            _probeCount = 0;
+            _totalInsertionTimeMs = 0;
         }
 
         public Core.Models.Statistics GetStatistics()
@@ -156,14 +177,14 @@ namespace HashTablesLab.HashTables
             return new Core.Models.Statistics
             {
                 LoadFactor = LoadFactor,
-                LongestChain = 0,
-                ShortestChain = 0,
+                LongestChain = 0, // Для открытой адресации не применимо
+                ShortestChain = 0, // Для открытой адресации не применимо
                 EmptyBuckets = empty,
                 LongestCluster = longestCluster,
-                InsertionTime = _timer.Elapsed,
-                SearchTime = TimeSpan.Zero,
-                CollisionCount = 0,
-                ProbeCount = 0
+                InsertionTime = System.TimeSpan.FromMilliseconds(_totalInsertionTimeMs),
+                SearchTime = System.TimeSpan.Zero,
+                CollisionCount = _collisionCount,
+                ProbeCount = _probeCount
             };
         }
 

@@ -1,6 +1,5 @@
 using HashTablesLab.Core.Interfaces;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 
 namespace HashTablesLab.HashTables
@@ -10,14 +9,16 @@ namespace HashTablesLab.HashTables
         private readonly LinkedList<KeyValuePair<TKey, TValue>>[] _buckets;
         private readonly IHashFunction<TKey> _hashFunction;
         private int _count;
-        private readonly Stopwatch _timer;
+        private int _collisionCount;
+        private int _totalInsertionTimeMs;
 
         public ChainedHashTable(int size, IHashFunction<TKey> hashFunction)
         {
             _buckets = new LinkedList<KeyValuePair<TKey, TValue>>[size];
             _hashFunction = hashFunction;
-            _timer = new Stopwatch();
             _count = 0;
+            _collisionCount = 0;
+            _totalInsertionTimeMs = 0;
         }
 
         public double LoadFactor => (double)_count / _buckets.Length;
@@ -25,24 +26,33 @@ namespace HashTablesLab.HashTables
 
         public bool Insert(TKey key, TValue value)
         {
-            _timer.Start();
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+
             int index = _hashFunction.Calculate(key, _buckets.Length);
 
             if (_buckets[index] == null)
                 _buckets[index] = new LinkedList<KeyValuePair<TKey, TValue>>();
 
+            // Проверяем коллизии
+            if (_buckets[index].Count > 0)
+                _collisionCount++;
+
+            // Проверка на существующий ключ
             foreach (var pair in _buckets[index])
             {
                 if (EqualityComparer<TKey>.Default.Equals(pair.Key, key))
                 {
-                    _timer.Stop();
+                    watch.Stop();
                     return false;
                 }
             }
 
             _buckets[index].AddLast(new KeyValuePair<TKey, TValue>(key, value));
             _count++;
-            _timer.Stop();
+
+            watch.Stop();
+            _totalInsertionTimeMs += (int)watch.ElapsedMilliseconds;
+
             return true;
         }
 
@@ -91,9 +101,10 @@ namespace HashTablesLab.HashTables
         public void Clear()
         {
             for (int i = 0; i < _buckets.Length; i++)
-                _buckets[i] = new LinkedList<KeyValuePair<TKey, TValue>>();
+                _buckets[i] = null;
             _count = 0;
-            _timer.Reset();
+            _collisionCount = 0;
+            _totalInsertionTimeMs = 0;
         }
 
         public Core.Models.Statistics GetStatistics()
@@ -104,18 +115,18 @@ namespace HashTablesLab.HashTables
 
             foreach (var bucket in _buckets)
             {
-                if (bucket == null || bucket.Count == 0)
+                int count = bucket?.Count ?? 0;
+
+                if (count == 0)
                 {
                     empty++;
-                    shortest = 0;
                 }
-                else
-                {
-                    if (bucket.Count > longest)
-                        longest = bucket.Count;
-                    if (bucket.Count < shortest)
-                        shortest = bucket.Count;
-                }
+
+                if (count > longest)
+                    longest = count;
+
+                if (count < shortest && count > 0)
+                    shortest = count;
             }
 
             if (shortest == int.MaxValue)
@@ -127,11 +138,11 @@ namespace HashTablesLab.HashTables
                 LongestChain = longest,
                 ShortestChain = shortest,
                 EmptyBuckets = empty,
-                LongestCluster = 0,
-                InsertionTime = _timer.Elapsed,
-                SearchTime = TimeSpan.Zero,
-                CollisionCount = 0,
-                ProbeCount = 0
+                LongestCluster = 0, // Для метода цепочек не применимо
+                InsertionTime = System.TimeSpan.FromMilliseconds(_totalInsertionTimeMs),
+                SearchTime = System.TimeSpan.Zero,
+                CollisionCount = _collisionCount,
+                ProbeCount = 0 // Для метода цепочек не применимо
             };
         }
 

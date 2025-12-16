@@ -1,13 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\src\\Benchmark",
-    "\\src\\Core",
-    "\\src\\Core\\Enums",
-    "\\src\\Core\\Models",
-    "\\src\\HashTables",
-    "\\tests\\HashTablesLab.Tests"
+    "\\HashTablesLab"
   ],
-  "SelectedNode": "\\HashTablesLab.csproj",
+  "SelectedNode": "\\HashTablesLab\\HashTablesLab.sln",
   "PreviewInSolutionExplorer": false
 }

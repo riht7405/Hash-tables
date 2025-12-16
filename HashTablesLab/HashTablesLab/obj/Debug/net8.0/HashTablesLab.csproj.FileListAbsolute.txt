@@ -12,3 +12,4 @@ C:\Users\user\Projects\Hash\HashTablesLab\HashTablesLab\obj\Debug\net8.0\refint\
 C:\Users\user\Projects\Hash\HashTablesLab\HashTablesLab\obj\Debug\net8.0\HashTablesLab.pdb
 C:\Users\user\Projects\Hash\HashTablesLab\HashTablesLab\obj\Debug\net8.0\HashTablesLab.genruntimeconfig.cache
 C:\Users\user\Projects\Hash\HashTablesLab\HashTablesLab\obj\Debug\net8.0\ref\HashTablesLab.dll
+C:\Users\user\Projects\Hash\HashTablesLab\HashTablesLab\obj\Debug\net8.0\HashTablesLab.sourcelink.json

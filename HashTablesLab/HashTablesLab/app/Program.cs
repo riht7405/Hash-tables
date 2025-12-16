@@ -203,82 +203,218 @@ namespace HashTablesLab.App
 
         #endregion
 
-        #region === ОСНОВНАЯ ЛАБОРАТОРНАЯ РАБОТА ===
+        #region === УЛУЧШЕННАЯ ЛАБОРАТОРНАЯ РАБОТА ===
 
         static void ExecuteLaboratoryWork()
         {
             Console.Clear();
-            ShowSectionHeader("🔬 ВЫПОЛНЕНИЕ ЛАБОРАТОРНОЙ РАБОТЫ", ConsoleColor.Yellow);
+            ShowLaboratoryWorkHeader();
 
-            // Информация о заданиях
-            ShowInfoBox("📋 ЗАДАНИЕ 1: Хеш-таблица с цепочками",
-                "• Размер таблицы: 1000 ячеек\n" +
-                "• Количество элементов: 100 000\n" +
-                "• Тестируемых функций: 6\n" +
-                "• Ожидаемое время: 10-15 секунд");
-
-            ShowInfoBox("📋 ЗАДАНИЕ 2: Хеш-таблица с открытой адресацией",
-                "• Размер таблицы: 10 000 ячеек\n" +
-                "• Количество элементов: 10 000\n" +
-                "• Методов разрешения коллизий: 5\n" +
-                "• Комбинаций для теста: 15");
-
-            Console.ForegroundColor = ConsoleColor.White;
-            CenterText("Нажмите Enter для начала тестирования...", 2);
-            Console.ResetColor();
-            Console.ReadLine();
-
-            // Выполняем оба задания
-            ExecuteTask1();
-            ExecuteTask2();
-
-            // Показываем итоги
-            ShowFinalSummary();
+            // Пошаговый мастер выполнения
+            if (ShowLaboratoryWorkWizard())
+            {
+                // Если пользователь подтвердил выполнение
+                ExecuteFullLaboratoryWork();
+            }
         }
 
-        static void ExecuteTask1()
+        static void ShowLaboratoryWorkHeader()
         {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+
+            string[] header = {
+        "╔══════════════════════════════════════════════════════════════════════╗",
+        "║                    🔬 ЛАБОРАТОРНАЯ РАБОТА                          ║",
+        "╠══════════════════════════════════════════════════════════════════════╣",
+        "║  Полный анализ эффективности хеш-таблиц с разными методами         ║",
+        "║  и параметрами. Автоматическое тестирование и визуализация.        ║",
+        "╚══════════════════════════════════════════════════════════════════════╝"
+    };
+
+            foreach (var line in header)
+            {
+                CenterText(line);
+            }
+            Console.ResetColor();
+            Console.WriteLine();
+        }
+
+        static bool ShowLaboratoryWorkWizard()
+        {
+            Console.ForegroundColor = ConsoleColor.White;
+            CenterText("🎯 МАСТЕР ВЫПОЛНЕНИЯ ЛАБОРАТОРНОЙ РАБОТЫ", 2);
+            Console.ResetColor();
+
+            // Шаг 1: Показываем что будет выполнено
+            ShowWizardStep("Шаг 1", "Обзор заданий", ConsoleColor.Blue);
+
+            ShowTaskCard("📋 ЗАДАНИЕ 1: Хеш-таблица с цепочками",
+                "Тестирование 6 хеш-функций",
+                "• Таблица: 1000 ячеек\n" +
+                "• Элементов: 100 000\n" +
+                "• Метод: цепочки\n" +
+                "• Время: ~15 секунд",
+                "🏗️");
+
+            ShowTaskCard("📋 ЗАДАНИЕ 2: Открытая адресация",
+                "Тестирование 15 комбинаций",
+                "• Таблица: 10 000 ячеек\n" +
+                "• Элементов: 10 000\n" +
+                "• Методы: 5 видов\n" +
+                "• Время: ~20 секунд",
+                "🔍");
+
+            Console.WriteLine();
+            ShowWizardStep("Шаг 2", "Настройка параметров", ConsoleColor.Green);
+
+            // Настраиваемые параметры
+            var config = ShowConfigurationPanel();
+
+            Console.WriteLine();
+            ShowWizardStep("Шаг 3", "Подтверждение запуска", ConsoleColor.Yellow);
+
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("\n  📊 БУДЕТ ВЫПОЛНЕНО:");
+            Console.ResetColor();
+
+            Console.WriteLine($"  • Тестов: {config.TotalTests}");
+            Console.WriteLine($"  • Всего элементов: {config.TotalElements:N0}");
+            Console.WriteLine($"  • Ожидаемое время: {config.EstimatedTime} секунд");
+            Console.WriteLine($"  • Будет сохранено: {(config.SaveResults ? "Да" : "Нет")}");
+
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write("\n  🚀 Запустить выполнение? (Да/Нет): ");
+            Console.ResetColor();
+
+            return Console.ReadLine()?.ToLower().StartsWith("д") ?? false;
+        }
+
+        static (int TotalTests, int TotalElements, string EstimatedTime, bool SaveResults) ShowConfigurationPanel()
+        {
+            Console.WriteLine("\n  ⚙️  НАСТРОЙКИ ВЫПОЛНЕНИЯ:");
+
+            // Выбор масштаба тестирования
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("\n  📈 Масштаб тестирования:");
+            Console.ResetColor();
+
+            ShowConfigOption("1", "Полный (рекомендуется)", "Точные результаты, больше времени");
+            ShowConfigOption("2", "Быстрый", "Быстрые результаты, меньше точности");
+            ShowConfigOption("3", "Демонстрационный", "Только для ознакомления");
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("  Выбор (1-3): ");
+            Console.ResetColor();
+
+            var scaleChoice = Console.ReadLine();
+            var scale = GetTestScale(scaleChoice);
+
+            // Дополнительные опции
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("\n  🎛️ Дополнительные опции:");
+            Console.ResetColor();
+
+            Console.Write("  💾 Сохранить результаты в файл? (Да/Нет): ");
+            bool saveResults = Console.ReadLine()?.ToLower().StartsWith("д") ?? false;
+
+            Console.Write("  📊 Показывать промежуточные графики? (Да/Нет): ");
+            bool showCharts = Console.ReadLine()?.ToLower().StartsWith("д") ?? false;
+
+            return (scale.TotalTests, scale.TotalElements, scale.EstimatedTime, saveResults);
+        }
+
+        static void ExecuteFullLaboratoryWork()
+        {
+            // Этап 1: Подготовка
             Console.Clear();
-            ShowSectionHeader("🏗️  ЗАДАНИЕ 1: ХЕШ-ТАБЛИЦА С ЦЕПОЧКАМИ", ConsoleColor.Cyan);
+            ShowExecutionStage("🔧 ПОДГОТОВКА", ConsoleColor.Blue);
+
+            ShowProgressAnimation("Инициализация компонентов", 800);
+            ShowProgressAnimation("Подготовка тестовых данных", 600);
+            ShowProgressAnimation("Настройка окружения", 400);
+
+            // Этап 2: Задание 1
+            Console.Clear();
+            ShowExecutionStage("🏗️  ВЫПОЛНЕНИЕ ЗАДАНИЯ 1", ConsoleColor.Cyan);
+
+            ExecuteTask1WithProgress();
+
+            // Этап 3: Задание 2  
+            Console.Clear();
+            ShowExecutionStage("🔍 ВЫПОЛНЕНИЕ ЗАДАНИЯ 2", ConsoleColor.Magenta);
+
+            ExecuteTask2WithProgress();
+
+            // Этап 4: Анализ результатов
+            Console.Clear();
+            ShowExecutionStage("📊 АНАЛИЗ РЕЗУЛЬТАТОВ", ConsoleColor.Green);
+
+            AnalyzeAndShowResults();
+        }
+
+        static void ExecuteTask1WithProgress()
+        {
+            Console.WriteLine("\n  🎯 ЦЕЛЬ: Сравнить 6 хеш-функций для метода цепочек\n");
+            Console.WriteLine("  📊 ПАРАМЕТРЫ ПО ТЗ:");
+            Console.WriteLine("  • Размер таблицы: 1000 ячеек");
+            Console.WriteLine("  • Количество элементов: 100000");
+            Console.WriteLine("  • Метод разрешения коллизий: цепочки\n");
 
             var functions = new IHashFunction<int>[]
             {
-                new DivisionHash(),
-                new MultiplicationHash(),
-                new CustomHash1(),
-                new CustomHash2(),
-                new CustomHash3(),
-                new CustomHash4()
+        new DivisionHash(),
+        new MultiplicationHash(),
+        new CustomHash1(),
+        new CustomHash2(),
+        new CustomHash3(),
+        new CustomHash4()
             };
 
             _task1Results.Clear();
             var random = new Random();
 
-            // Показываем прогресс выполнения
-            ShowProgressPanel("Тестирование хеш-функций для метода цепочек", functions.Length);
+            // Показываем красивую панель прогресса
+            ShowEnhancedProgressBar("Тестирование хеш-функций", functions.Length);
 
             for (int i = 0; i < functions.Length; i++)
             {
                 var function = functions[i];
 
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.Write($"\n  📊 Тест {i + 1}/{functions.Length}: ");
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine($"{function.Name}");
-                Console.ResetColor();
+                // Показываем текущий тест
+                ShowCurrentTestInfo(i + 1, functions.Length, function.Name);
 
                 try
                 {
-                    // Используем меньшие значения для демонстрации
-                    var table = new ChainedHashTable<int, string>(500, function);
+                    // ПАРАМЕТРЫ ПО ТЗ: m=1000, n=100000
+                    int tableSize = 1000;      // m = 1000
+                    int elementCount = 100000; // n = 100000
+
+                    var table = new ChainedHashTable<int, string>(tableSize, function);
                     var stopwatch = Stopwatch.StartNew();
                     int inserted = 0;
 
-                    // Тестовый набор из 5000 элементов
-                    for (int j = 0; j < 5000; j++)
+                    // Генерируем 100000 УНИКАЛЬНЫХ ключей
+                    var uniqueKeys = GenerateUniqueKeys(elementCount, random);
+
+                    for (int j = 0; j < elementCount; j++)
                     {
-                        if (table.Insert(random.Next(1, 10000), $"Value_{j}"))
-                            inserted++;
+                        try
+                        {
+                            if (table.Insert(uniqueKeys[j], $"Value_{j}"))
+                                inserted++;
+                        }
+                        catch (InvalidOperationException ex) when (ex.Message.Contains("переполнен") || ex.Message.Contains("Не удалось найти"))
+                        {
+                            // Записываем сколько удалось вставить
+                            Console.WriteLine($"    ⚠️  Переполнение после {inserted} элементов");
+                            break;
+                        }
+
+                        // Показываем прогресс каждые 10000 элементов
+                        if (j % 10000 == 0 && j > 0)
+                        {
+                            ShowMiniProgress(j, elementCount);
+                        }
                     }
 
                     stopwatch.Stop();
@@ -289,8 +425,8 @@ namespace HashTablesLab.App
                         TestName = GetShortFunctionName(function),
                         HashMethod = GetHashMethodType(function),
                         ResolutionMethod = CollisionResolutionType.Chaining,
-                        TableSize = 500,
-                        ElementCount = 5000,
+                        TableSize = tableSize,
+                        ElementCount = elementCount,
                         InsertedCount = inserted,
                         Duration = stopwatch.Elapsed,
                         Statistics = stats
@@ -298,150 +434,721 @@ namespace HashTablesLab.App
 
                     _task1Results.Add(result);
 
-                    // Показываем мини-график
-                    ShowMiniResult(stats.LongestChain, stats.LoadFactor, stopwatch.Elapsed.TotalMilliseconds);
+                    // Показываем результат
+                    ShowTestResultCard(stats.LongestChain, stats.LoadFactor,
+                        stopwatch.Elapsed.TotalMilliseconds, GetShortFunctionName(function));
                 }
                 catch (Exception ex)
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"    ❌ Ошибка: {ex.Message}");
-                    Console.ResetColor();
+                    ShowErrorCard($"Ошибка в тесте {function.Name}", ex.Message);
                 }
 
-                // Обновляем прогресс
-                UpdateProgressBar(i + 1, functions.Length);
+                UpdateEnhancedProgressBar(i + 1, functions.Length);
+
+                if (i < functions.Length - 1)
+                {
+                    Thread.Sleep(300);
+                }
             }
 
-            Console.WriteLine("\n");
+            Console.WriteLine("\n  ✅ Задание 1 завершено!");
             ShowPressAnyKey();
         }
 
-        static void ExecuteTask2()
+        static void ExecuteTask2WithProgress()
         {
             Console.Clear();
-            ShowSectionHeader("🔍 ЗАДАНИЕ 2: ОТКРЫТАЯ АДРЕСАЦИЯ", ConsoleColor.Magenta);
+            ShowExecutionStage("🔍 ЗАДАНИЕ 2: ОТКРЫТАЯ АДРЕСАЦИЯ", ConsoleColor.Magenta);
 
-            var functions = new IHashFunction<int>[]
-            {
-                new DivisionHash(),
-                new MultiplicationHash(),
-                new CustomHash1()
-            };
+            Console.WriteLine("\n  🎯 ЦЕЛЬ: Сравнить 5 методов разрешения коллизий\n");
+            Console.WriteLine("  📊 ПАРАМЕТРЫ ПО ТЗ:");
+            Console.WriteLine("  • Размер таблицы: 10000 ячеек");
+            Console.WriteLine("  • Количество элементов: 10000");
+            Console.WriteLine("  • Хеш-функция: Метод деления (единая для всех тестов)");
+            Console.WriteLine("  • Тестируемые методы: 5 (3 базовых + 2 собственных)\n");
+
+            // ТОЛЬКО ОДНА хеш-функция согласно ТЗ
+            IHashFunction<int> hashFunction = new DivisionHash();
 
             var resolvers = new ICollisionResolver[]
             {
-                new LinearProbing(),
-                new QuadraticProbing(),
-                new DoubleHashing(),
-                new CustomResolver1(),
-                new CustomResolver2()
+        new LinearProbing(),
+        new QuadraticProbing(),
+        new DoubleHashing(),
+        new CustomResolver1(),
+        new CustomResolver2()
             };
 
             _task2Results.Clear();
             var random = new Random();
-            int totalTests = functions.Length * resolvers.Length;
-            int currentTest = 0;
 
-            ShowProgressPanel("Тестирование комбинаций хеш-функций и методов разрешения", totalTests);
+            ShowEnhancedProgressBar("Тестирование методов разрешения коллизий", resolvers.Length);
 
-            foreach (var function in functions)
+            for (int i = 0; i < resolvers.Length; i++)
             {
-                foreach (var resolver in resolvers)
+                var resolver = resolvers[i];
+
+                ShowCurrentTestInfo(i + 1, resolvers.Length, resolver.Name);
+
+                try
                 {
-                    currentTest++;
+                    // ПАРАМЕТРЫ ПО ТЗ: m=10000, n=10000
+                    int tableSize = 10000;    // m = 10000
+                    int elementCount = 10000; // n = 10000
 
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Console.Write($"\n  🔬 Тест {currentTest}/{totalTests}: ");
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine($"{GetShortFunctionName(function)} + {GetShortResolverName(resolver)}");
-                    Console.ResetColor();
+                    var table = new OpenAddressingHashTable<int, string>(tableSize, hashFunction, resolver);
+                    var stopwatch = Stopwatch.StartNew();
+                    int inserted = 0;
 
-                    try
+                    // Генерируем 10000 УНИКАЛЬНЫХ ключей заранее
+                    Console.Write("    Генерация ключей... ");
+                    var uniqueKeys = GenerateUniqueKeys(elementCount, random);
+                    Console.WriteLine("✅");
+
+                    Console.Write("    Вставка элементов: ");
+
+                    for (int j = 0; j < elementCount; j++)
                     {
-                        var table = new OpenAddressingHashTable<int, string>(1000, function, resolver);
-                        var stopwatch = Stopwatch.StartNew();
-                        int inserted = 0;
-
-                        // Тестовый набор из 800 элементов (80% заполнения)
-                        for (int i = 0; i < 800; i++)
+                        try
                         {
-                            try
-                            {
-                                if (table.Insert(random.Next(1, 5000), $"Value_{i}"))
-                                    inserted++;
-                            }
-                            catch (InvalidOperationException)
-                            {
-                                break;
-                            }
+                            if (table.Insert(uniqueKeys[j], $"Value_{j}"))
+                                inserted++;
+                        }
+                        catch (InvalidOperationException ex) when (ex.Message.Contains("переполнения") || ex.Message.Contains("близка"))
+                        {
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.WriteLine($"\n    ⚠️  Таблица заполнена на {table.Count}/{tableSize} элементов");
+                            Console.ResetColor();
+                            break;
+                        }
+                        catch (InvalidOperationException ex) when (ex.Message.Contains("Не удалось найти"))
+                        {
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.WriteLine($"\n    ⚠️  Не удалось найти свободную ячейку");
+                            Console.ResetColor();
+                            break;
                         }
 
-                        stopwatch.Stop();
-
-                        var stats = table.GetStatistics();
-                        var result = new BenchmarkResult
+                        // Показываем прогресс
+                        if (j % 2000 == 0 && j > 0)
                         {
-                            TestName = $"{GetShortFunctionName(function)} + {GetShortResolverName(resolver)}",
-                            HashMethod = GetHashMethodType(function),
-                            ResolutionMethod = GetResolutionType(resolver),
-                            TableSize = 1000,
-                            ElementCount = 800,
-                            InsertedCount = inserted,
-                            Duration = stopwatch.Elapsed,
-                            Statistics = stats
-                        };
-
-                        _task2Results.Add(result);
-
-                        // Показываем мини-результат
-                        ShowMiniResult(stats.LongestCluster, stats.LoadFactor, stopwatch.Elapsed.TotalMilliseconds);
+                            ShowMiniProgress(j, elementCount);
+                        }
                     }
-                    catch (Exception ex)
+
+                    stopwatch.Stop();
+                    Console.WriteLine(); // Новая строка после прогресс-бара
+
+                    var stats = table.GetStatistics();
+                    var result = new BenchmarkResult
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine($"    ❌ Ошибка: {ex.Message}");
-                        Console.ResetColor();
-                    }
+                        TestName = resolver.Name,
+                        HashMethod = HashMethodType.Division, // Все используют метод деления
+                        ResolutionMethod = GetResolutionType(resolver),
+                        TableSize = tableSize,
+                        ElementCount = elementCount,
+                        InsertedCount = inserted,
+                        Duration = stopwatch.Elapsed,
+                        Statistics = stats
+                    };
 
-                    UpdateProgressBar(currentTest, totalTests);
+                    _task2Results.Add(result);
+
+                    // Показываем детальный результат
+                    ShowDetailedResultCard(result, resolver.Name);
+                }
+                catch (Exception ex)
+                {
+                    ShowErrorCard($"Ошибка в методе {resolver.Name}", ex.Message);
+                }
+
+                UpdateEnhancedProgressBar(i + 1, resolvers.Length);
+
+                if (i < resolvers.Length - 1)
+                {
+                    Thread.Sleep(300);
                 }
             }
 
-            Console.WriteLine("\n");
+            Console.WriteLine("\n  ✅ Задание 2 завершено!");
+
+            // Анализ результатов Задания 2
+            AnalyzeTask2Results();
+
             ShowPressAnyKey();
         }
 
-        static void ShowFinalSummary()
+        static void AnalyzeTask2Results()
         {
-            Console.Clear();
-            ShowSectionHeader("🏆 ИТОГИ ЛАБОРАТОРНОЙ РАБОТЫ", ConsoleColor.Green);
+            if (_task2Results.Count == 0) return;
+
+            Console.WriteLine("\n  📈 АНАЛИЗ РЕЗУЛЬТАТОВ ЗАДАНИЯ 2:");
+            Console.WriteLine("  ──────────────────────────────────────────────");
+
+            // Группируем по успешности вставки
+            var successful = _task2Results.Where(r => r.InsertedCount == r.ElementCount).ToList();
+            var partial = _task2Results.Where(r => r.InsertedCount < r.ElementCount).ToList();
+
+            if (successful.Count > 0)
+            {
+                Console.WriteLine("\n  ✅ УСПЕШНО ВСТАВЛЕНЫ ВСЕ 10000 ЭЛЕМЕНТОВ:");
+
+                var bestSuccessful = successful
+                    .OrderBy(r => r.Statistics.LongestCluster)
+                    .ThenBy(r => r.Duration.TotalMilliseconds)
+                    .First();
+
+                Console.WriteLine($"    🏆 Лучший метод: {bestSuccessful.TestName}");
+                Console.WriteLine($"       • Длина кластера: {bestSuccessful.Statistics.LongestCluster}");
+                Console.WriteLine($"       • Время: {bestSuccessful.Duration.TotalMilliseconds:F0} мс");
+                Console.WriteLine($"       • Коэффициент: {bestSuccessful.Statistics.LoadFactor:P2}");
+            }
+
+            if (partial.Count > 0)
+            {
+                Console.WriteLine("\n  ⚠️  ЧАСТИЧНО ЗАПОЛНЕННЫЕ ТАБЛИЦЫ:");
+
+                foreach (var result in partial.OrderByDescending(r => r.InsertedCount))
+                {
+                    double fillPercentage = (double)result.InsertedCount / result.ElementCount;
+                    Console.WriteLine($"    {result.TestName}:");
+                    Console.WriteLine($"       • Вставлено: {result.InsertedCount} ({fillPercentage:P1})");
+                    Console.WriteLine($"       • Причина: переполнение при {result.Statistics.LoadFactor:P2} заполнения");
+                }
+            }
+
+            // Общие выводы
+            Console.WriteLine("\n  💡 ВЫВОДЫ ПО ЗАДАНИЮ 2:");
+
+            if (successful.Count == _task2Results.Count)
+            {
+                Console.WriteLine("    • Все методы справились с вставкой 10000 элементов");
+                Console.WriteLine("    • Это хороший показатель для таблицы размером 10000 ячеек");
+            }
+            else if (successful.Count > 0)
+            {
+                Console.WriteLine("    • Некоторые методы не справились с полной вставкой");
+                Console.WriteLine("    • Это демонстрирует проблему кластеризации");
+            }
+            else
+            {
+                Console.WriteLine("    • Ни один метод не смог вставить все 10000 элементов");
+                Console.WriteLine("    • Возможно, размер таблицы слишком мал или много коллизий");
+            }
+        }
+
+        static void ShowDetailedResultCard(BenchmarkResult result, string methodName)
+        {
+            Console.WriteLine("\n    📊 РЕЗУЛЬТАТЫ ТЕСТА:");
+            Console.WriteLine("    ──────────────────────────────────────");
+
+            Console.WriteLine($"    Метод: {methodName}");
+            Console.WriteLine($"    Вставлено элементов: {result.InsertedCount}/{result.ElementCount}");
+
+            if (result.InsertedCount < result.ElementCount)
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine($"    ❗ Не вставлено: {result.ElementCount - result.InsertedCount} элементов");
+                Console.ResetColor();
+            }
+
+            Console.WriteLine($"    Коэффициент заполнения: {result.Statistics.LoadFactor:P2}");
+            Console.WriteLine($"    Длина самого длинного кластера: {result.Statistics.LongestCluster}");
+            Console.WriteLine($"    Пустых ячеек: {result.Statistics.EmptyBuckets}");
+            Console.WriteLine($"    Время выполнения: {result.Duration.TotalMilliseconds:F0} мс");
+
+            // Визуализация кластера
+            Console.Write($"    Эффективность: ");
+            Console.ForegroundColor = GetEfficiencyColor(result.Statistics.LongestCluster, false);
+            Console.WriteLine(GetEfficiencyRating(result.Statistics.LongestCluster, false));
+            Console.ResetColor();
+
+            // Мини-график кластеров
+            if (result.Statistics.LongestCluster > 0)
+            {
+                Console.Write($"    Кластеры: ");
+                Console.ForegroundColor = GetMetricColor(result.Statistics.LongestCluster, false);
+                Console.WriteLine(new string('█', Math.Min(result.Statistics.LongestCluster / 2, 20)));
+                Console.ResetColor();
+            }
+        }
+
+        static int[] GenerateUniqueKeys(int count, Random random)
+        {
+            // Для производительности генерируем набор уникальных ключей заранее
+            var keys = new HashSet<int>();
+
+            // Генерируем ключи в диапазоне, чтобы минимизировать коллизии
+            int minKey = 1;
+            int maxKey = count * 10; // Большой диапазон для уникальности
+
+            while (keys.Count < count)
+            {
+                keys.Add(random.Next(minKey, maxKey));
+            }
+
+            // Преобразуем в массив и перемешиваем
+            var result = keys.ToArray();
+
+            // Перемешиваем для случайного порядка
+            for (int i = result.Length - 1; i > 0; i--)
+            {
+                int j = random.Next(i + 1);
+                (result[i], result[j]) = (result[j], result[i]);
+            }
+
+            return result;
+        }
+
+        static void AnalyzeAndShowResults()
+        {
+            Console.WriteLine("\n  📈 АНАЛИЗ РЕЗУЛЬТАТОВ ТЕСТИРОВАНИЯ\n");
+
+            // Анимация анализа
+            ShowProgressAnimation("Сбор статистики", 600);
+            ShowProgressAnimation("Анализ эффективности", 800);
+            ShowProgressAnimation("Формирование выводов", 400);
+
+            // Показываем топ-результаты
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("\n  🏆 ТОП-3 ХЕШ-ФУНКЦИИ (метод цепочек):");
+            Console.ResetColor();
 
             if (_task1Results.Count > 0)
             {
-                ShowSummaryCard("🎯 ЛУЧШАЯ ХЕШ-ФУНКЦИЯ (Метод цепочек)",
-                    GetBestChainResult(),
-                    "Длина самой длинной цепочки");
+                var topChainResults = _task1Results
+                    .OrderBy(r => r.Statistics.LongestChain)
+                    .Take(3)
+                    .ToList();
+
+                for (int i = 0; i < topChainResults.Count; i++)
+                {
+                    var result = topChainResults[i];
+                    string medal = i == 0 ? "🥇" : i == 1 ? "🥈" : "🥉";
+
+                    Console.WriteLine($"  {medal} {result.TestName,-20} │ Цепь: {result.Statistics.LongestChain,3} │ " +
+                                    $"Эффективность: {GetEfficiencyStars(result.Statistics.LongestChain, true)}");
+                }
+            }
+
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("\n  🏆 ТОП-3 КОМБИНАЦИИ (открытая адресация):");
+            Console.ResetColor();
+
+            if (_task2Results.Count > 0)
+            {
+                var topOpenResults = _task2Results
+                    .Where(r => r.InsertedCount >= r.ElementCount * 0.8)
+                    .OrderBy(r => r.Statistics.LongestCluster)
+                    .Take(3)
+                    .ToList();
+
+                for (int i = 0; i < topOpenResults.Count; i++)
+                {
+                    var result = topOpenResults[i];
+                    string medal = i == 0 ? "🥇" : i == 1 ? "🥈" : "🥉";
+
+                    Console.WriteLine($"  {medal} {result.TestName,-25} │ Кластер: {result.Statistics.LongestCluster,3} │ " +
+                                    $"Эффективность: {GetEfficiencyStars(result.Statistics.LongestCluster, false)}");
+                }
+            }
+
+            // Показываем сравнительную визуализацию
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("\n  📊 СРАВНИТЕЛЬНАЯ ВИЗУАЛИЗАЦИЯ:");
+            Console.ResetColor();
+
+            if (_task1Results.Count > 0)
+            {
+                Console.WriteLine("\n  Метод цепочек (длина цепочки):");
+                ShowComparisonVisualization(_task1Results, true);
             }
 
             if (_task2Results.Count > 0)
             {
-                ShowSummaryCard("🏅 ЛУЧШАЯ КОМБИНАЦИЯ (Открытая адресация)",
-                    GetBestOpenAddressingResult(),
-                    "Длина самого длинного кластера");
+                Console.WriteLine("\n  Открытая адресация (длина кластера):");
+                ShowComparisonVisualization(_task2Results, false);
             }
 
-            // Ключевые выводы
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            CenterText("📈 КЛЮЧЕВЫЕ ВЫВОДЫ:", 2);
+            // Итоговые выводы
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("\n  🎯 ИТОГОВЫЕ ВЫВОДЫ:");
             Console.ResetColor();
 
-            ShowBulletPoint("✅ Метод умножения обычно дает лучшее распределение");
-            ShowBulletPoint("✅ Двойное хеширование эффективнее линейных методов");
-            ShowBulletPoint("✅ Для больших данных лучше подходят цепочки");
-            ShowBulletPoint("✅ Для скорости поиска - открытая адресация");
-            ShowBulletPoint("⚠️  Коэффициент заполнения выше 75% замедляет работу");
+            ShowConclusionCard("Лучшая хеш-функция",
+                GetBestChainResult()?.TestName ?? "Не определено",
+                "Для метода цепочек");
+
+            ShowConclusionCard("Лучшая комбинация",
+                GetBestOpenAddressingResult()?.TestName ?? "Не определено",
+                "Для открытой адресации");
+
+            ShowConclusionCard("Общая рекомендация",
+                GetOverallRecommendation(),
+                "Для практического применения");
+
+            // Предложение сохранить результаты
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.Write("\n  💾 Сохранить полный отчет? (Да/Нет): ");
+            Console.ResetColor();
+
+            if (Console.ReadLine()?.ToLower().StartsWith("д") ?? false)
+            {
+                SaveResultsToFile();
+                Console.WriteLine("  ✅ Отчет сохранен в файл 'results.txt'");
+            }
 
             ShowPressAnyKey();
+        }
+
+        #endregion
+
+        #region === ВСПОМОГАТЕЛЬНЫЕ МЕТОДЫ ДЛЯ ЛАБОРАТОРНОЙ РАБОТЫ ===
+
+        static void ShowWizardStep(string stepNumber, string stepName, ConsoleColor color)
+        {
+            Console.ForegroundColor = color;
+            Console.Write($"  {stepNumber}: ");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine(stepName);
+            Console.WriteLine("  " + new string('─', 50));
+            Console.ResetColor();
+        }
+
+        static void ShowTaskCard(string title, string subtitle, string details, string emoji)
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write($"\n  {emoji} ");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine(title);
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine($"    {subtitle}");
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+
+            foreach (var line in details.Split('\n'))
+            {
+                Console.WriteLine($"      {line}");
+            }
+
+            Console.ResetColor();
+        }
+
+        static void ShowConfigOption(string number, string title, string description)
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write($"    {number}. ");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write($"{title,-20}");
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine($"— {description}");
+            Console.ResetColor();
+        }
+
+        static (int TotalTests, int TotalElements, string EstimatedTime) GetTestScale(string choice)
+        {
+            return choice switch
+            {
+                "2" => (8, 50000, "10"),
+                "3" => (4, 10000, "5"),
+                _ => (21, 150000, "25") // По умолчанию полный тест
+            };
+        }
+
+        static void ShowExecutionStage(string stageName, ConsoleColor color)
+        {
+            Console.ForegroundColor = color;
+            CenterText(new string('═', 60));
+            CenterText(stageName);
+            CenterText(new string('═', 60));
+            Console.ResetColor();
+            Console.WriteLine();
+        }
+
+        static void ShowEnhancedProgressBar(string taskName, int totalSteps)
+        {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine($"\n  📋 {taskName}");
+            Console.ResetColor();
+            Console.WriteLine("  " + new string('─', 50));
+            Console.WriteLine();
+        }
+
+        static void ShowCurrentTestInfo(int current, int total, string testName)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.Write($"\n\n  Тест {current}/{total}: ");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine(testName);
+            Console.ResetColor();
+        }
+
+        static void ShowMiniProgress(int current, int total)
+        {
+            int width = 20;
+            double percentage = (double)current / total;
+            int progress = (int)(width * percentage);
+
+            Console.Write($"\r    [");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write(new string('░', progress));
+            Console.ResetColor();
+            Console.Write(new string(' ', width - progress));
+            Console.Write($"] {percentage:P0}");
+        }
+
+        static void UpdateEnhancedProgressBar(int current, int total)
+        {
+            int width = 40;
+            double percentage = (double)current / total;
+            int progress = (int)(width * percentage);
+
+            string[] phases = { "▏", "▎", "▍", "▌", "▋", "▊", "▉", "█" };
+            string progressChar = phases[Math.Min((int)(percentage * phases.Length), phases.Length - 1)];
+
+            Console.Write($"\r  Общий прогресс: [");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write(new string('█', progress));
+            if (progress < width) Console.Write(progressChar);
+            Console.ResetColor();
+            Console.Write(new string(' ', width - progress));
+            Console.Write($"] {percentage:P0}");
+        }
+
+        static void ShowTestResultCard(int metric, double loadFactor, double timeMs, string testName)
+        {
+            // Ограничиваем коэффициент заполнения 100%
+            double displayLoadFactor = Math.Min(loadFactor, 1.0);
+
+            Console.Write($"\n    📊 ");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write($"{testName,-25}");
+            Console.ResetColor();
+
+            Console.Write($" │ 📏 {metric,3} ");
+
+            // Цветовая индикация метрики
+            bool isChain = testName.Contains("цеп") || !testName.Contains("+");
+            Console.ForegroundColor = GetMetricColor(metric, isChain);
+            Console.Write(new string('█', Math.Min(metric, 10)));
+            Console.ResetColor();
+
+            // Корректное отображение коэффициента заполнения
+            if (loadFactor > 1.0)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write($" │ 📈 >100% ");
+                Console.ResetColor();
+            }
+            else
+            {
+                Console.Write($" │ 📈 {displayLoadFactor,6:P1} ");
+            }
+
+            Console.Write($"│ ⚡ {timeMs,5:F0}мс");
+
+            // Рейтинг эффективности
+            Console.ForegroundColor = GetEfficiencyColor(metric, isChain);
+            Console.Write($" │ {GetEfficiencyRating(metric, isChain)}");
+            Console.ResetColor();
+
+            Console.WriteLine();
+        }
+
+        static void ShowErrorCard(string title, string message)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write($"\n    ❌ {title}: ");
+            Console.ResetColor();
+            Console.WriteLine(message);
+        }
+
+        static string GetEfficiencyStars(int metric, bool isChain)
+        {
+            int stars = isChain
+                ? metric switch { < 3 => 5, < 10 => 4, < 20 => 3, < 30 => 2, _ => 1 }
+                : metric switch { < 5 => 5, < 15 => 4, < 25 => 3, < 40 => 2, _ => 1 };
+
+            return new string('★', stars) + new string('☆', 5 - stars);
+        }
+
+        static void ShowComparisonVisualization(List<BenchmarkResult> results, bool isChain)
+        {
+            var topResults = results
+                .OrderBy(r => isChain ? r.Statistics.LongestChain : r.Statistics.LongestCluster)
+                .Take(5)
+                .ToList();
+
+            foreach (var result in topResults)
+            {
+                int value = isChain ? result.Statistics.LongestChain : result.Statistics.LongestCluster;
+                string name = result.TestName.PadRight(25).Substring(0, 25);
+
+                // График в виде горизонтальных полос
+                int barLength = Math.Min(value * (isChain ? 2 : 1), 30);
+                string bar = new string('█', barLength);
+
+                Console.Write($"    {name} │ ");
+                Console.ForegroundColor = GetPerformanceColor(value, isChain ? "chain" : "cluster");
+                Console.WriteLine($"{bar} {value}");
+                Console.ResetColor();
+            }
+        }
+
+        static void ShowConclusionCard(string title, string value, string description)
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write($"\n    • {title}: ");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine(value);
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine($"      {description}");
+            Console.ResetColor();
+        }
+
+        static string GetOverallRecommendation()
+        {
+            if (_task1Results.Count == 0 || _task2Results.Count == 0)
+                return "Недостаточно данных";
+
+            var bestChain = GetBestChainResult();
+            var bestOpen = GetBestOpenAddressingResult();
+
+            if (bestChain == null || bestOpen == null)
+                return "Недостаточно данных";
+
+            int chainMetric = bestChain.Statistics.LongestChain;
+            int openMetric = bestOpen.Statistics.LongestCluster;
+
+            // Простая логика рекомендации
+            if (chainMetric < 5 && openMetric < 10)
+                return "Оба метода эффективны. Выбор зависит от конкретной задачи.";
+            else if (chainMetric < openMetric * 2)
+                return "Метод цепочек показывает лучшие результаты";
+            else
+                return "Открытая адресация более эффективна для этих данных";
+        }
+
+        static void SaveResultsToFile()
+        {
+            try
+            {
+                using var writer = new StreamWriter("results.txt", false, System.Text.Encoding.UTF8);
+                writer.WriteLine("ОТЧЕТ ПО ЛАБОРАТОРНОЙ РАБОТЕ: ХЕШ-ТАБЛИЦЫ");
+                writer.WriteLine(new string('=', 60));
+                writer.WriteLine($"Дата генерации: {DateTime.Now:dd.MM.yyyy HH:mm:ss}");
+                writer.WriteLine();
+
+                if (_task1Results.Count > 0)
+                {
+                    writer.WriteLine("ЗАДАНИЕ 1: ХЕШ-ТАБЛИЦЫ С ЦЕПОЧКАМИ");
+                    writer.WriteLine(new string('-', 60));
+
+                    foreach (var result in _task1Results.OrderBy(r => r.Statistics.LongestChain))
+                    {
+                        writer.WriteLine($"{result.TestName}:");
+                        writer.WriteLine($"  • Длина цепочки: {result.Statistics.LongestChain}");
+                        writer.WriteLine($"  • Коэффициент заполнения: {result.Statistics.LoadFactor:P2}");
+                        writer.WriteLine($"  • Время: {result.Duration.TotalMilliseconds:F0} мс");
+                        writer.WriteLine();
+                    }
+                }
+
+                if (_task2Results.Count > 0)
+                {
+                    writer.WriteLine("ЗАДАНИЕ 2: ХЕШ-ТАБЛИЦЫ С ОТКРЫТОЙ АДРЕСАЦИЕЙ");
+                    writer.WriteLine(new string('-', 60));
+
+                    foreach (var result in _task2Results.OrderBy(r => r.Statistics.LongestCluster))
+                    {
+                        writer.WriteLine($"{result.TestName}:");
+                        writer.WriteLine($"  • Длина кластера: {result.Statistics.LongestCluster}");
+                        writer.WriteLine($"  • Коэффициент заполнения: {result.Statistics.LoadFactor:P2}");
+                        writer.WriteLine($"  • Вставлено: {result.InsertedCount}/{result.ElementCount}");
+                        writer.WriteLine();
+                    }
+                }
+            }
+            catch
+            {
+                // Игнорируем ошибки записи
+            }
+        }
+
+        static ConsoleColor GetMetricColor(int value, bool isChain)
+        {
+            if (isChain)
+            {
+                // Для метода цепочек учитываем, что могут быть длинные цепочки
+                return value switch
+                {
+                    < 5 => ConsoleColor.Green,      // Отлично (< 5)
+                    < 20 => ConsoleColor.Yellow,    // Хорошо (< 20)
+                    < 50 => ConsoleColor.DarkYellow,// Удовлетворительно (< 50)
+                    < 100 => ConsoleColor.Red,      // Плохо (< 100)
+                    _ => ConsoleColor.DarkRed       // Очень плохо (≥ 100)
+                };
+            }
+            else
+            {
+                return value switch
+                {
+                    < 10 => ConsoleColor.Green,     // Отлично (< 10)
+                    < 30 => ConsoleColor.Yellow,    // Хорошо (< 30)
+                    < 60 => ConsoleColor.DarkYellow,// Удовлетворительно (< 60)
+                    < 100 => ConsoleColor.Red,      // Плохо (< 100)
+                    _ => ConsoleColor.DarkRed       // Очень плохо (≥ 100)
+                };
+            }
+        }
+
+        static ConsoleColor GetEfficiencyColor(int value, bool isChain)
+        {
+            if (isChain)
+            {
+                return value switch
+                {
+                    < 3 => ConsoleColor.Green,
+                    < 10 => ConsoleColor.Yellow,
+                    < 20 => ConsoleColor.DarkYellow,
+                    _ => ConsoleColor.Red
+                };
+            }
+            else
+            {
+                return value switch
+                {
+                    < 5 => ConsoleColor.Green,
+                    < 15 => ConsoleColor.Yellow,
+                    < 30 => ConsoleColor.DarkYellow,
+                    _ => ConsoleColor.Red
+                };
+            }
+        }
+
+        static string GetEfficiencyRating(int value, bool isChain)
+        {
+            if (isChain)
+            {
+                return value switch
+                {
+                    < 3 => "Отлично ⭐⭐⭐⭐⭐",
+                    < 10 => "Очень хорошо ⭐⭐⭐⭐",
+                    < 20 => "Хорошо ⭐⭐⭐",
+                    < 30 => "Удовлетворительно ⭐⭐",
+                    _ => "Плохо ⭐"
+                };
+            }
+            else
+            {
+                return value switch
+                {
+                    < 5 => "Отлично ⭐⭐⭐⭐⭐",
+                    < 15 => "Очень хорошо ⭐⭐⭐⭐",
+                    < 30 => "Хорошо ⭐⭐⭐",
+                    < 50 => "Удовлетворительно ⭐⭐",
+                    _ => "Плохо ⭐"
+                };
+            }
         }
 
         #endregion
