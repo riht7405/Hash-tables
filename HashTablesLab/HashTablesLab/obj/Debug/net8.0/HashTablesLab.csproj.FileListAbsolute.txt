@@ -1,0 +1,14 @@
+C:\Users\user\Projects\Hash\HashTablesLab\HashTablesLab\obj\Debug\net8.0\HashTablesLab.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Projects\Hash\HashTablesLab\HashTablesLab\obj\Debug\net8.0\HashTablesLab.AssemblyInfoInputs.cache
+C:\Users\user\Projects\Hash\HashTablesLab\HashTablesLab\obj\Debug\net8.0\HashTablesLab.AssemblyInfo.cs
+C:\Users\user\Projects\Hash\HashTablesLab\HashTablesLab\obj\Debug\net8.0\HashTablesLab.csproj.CoreCompileInputs.cache
+C:\Users\user\Projects\Hash\HashTablesLab\HashTablesLab\bin\Debug\net8.0\HashTablesLab.exe
+C:\Users\user\Projects\Hash\HashTablesLab\HashTablesLab\bin\Debug\net8.0\HashTablesLab.deps.json
+C:\Users\user\Projects\Hash\HashTablesLab\HashTablesLab\bin\Debug\net8.0\HashTablesLab.runtimeconfig.json
+C:\Users\user\Projects\Hash\HashTablesLab\HashTablesLab\bin\Debug\net8.0\HashTablesLab.dll
+C:\Users\user\Projects\Hash\HashTablesLab\HashTablesLab\bin\Debug\net8.0\HashTablesLab.pdb
+C:\Users\user\Projects\Hash\HashTablesLab\HashTablesLab\obj\Debug\net8.0\HashTablesLab.dll
+C:\Users\user\Projects\Hash\HashTablesLab\HashTablesLab\obj\Debug\net8.0\refint\HashTablesLab.dll
+C:\Users\user\Projects\Hash\HashTablesLab\HashTablesLab\obj\Debug\net8.0\HashTablesLab.pdb
+C:\Users\user\Projects\Hash\HashTablesLab\HashTablesLab\obj\Debug\net8.0\HashTablesLab.genruntimeconfig.cache
+C:\Users\user\Projects\Hash\HashTablesLab\HashTablesLab\obj\Debug\net8.0\ref\HashTablesLab.dll

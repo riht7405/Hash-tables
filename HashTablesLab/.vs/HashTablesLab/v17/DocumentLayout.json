@@ -1,0 +1,455 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|c:\\users\\user\\projects\\hash\\hashtableslab\\hashtableslab\\app\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|solutionrelative:hashtableslab\\app\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|c:\\users\\user\\projects\\hash\\hashtableslab\\hashtableslab\\src\\visualization\\consolevisualizer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|solutionrelative:hashtableslab\\src\\visualization\\consolevisualizer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|c:\\users\\user\\projects\\hash\\hashtableslab\\hashtableslab\\hashtableslab.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|solutionrelative:hashtableslab\\hashtableslab.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|c:\\users\\user\\projects\\hash\\hashtableslab\\hashtableslab\\src\\collisionresolvers\\customresolver2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|solutionrelative:hashtableslab\\src\\collisionresolvers\\customresolver2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|c:\\users\\user\\projects\\hash\\hashtableslab\\hashtableslab\\src\\hashfunctions\\divisionhash.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|solutionrelative:hashtableslab\\src\\hashfunctions\\divisionhash.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|c:\\users\\user\\projects\\hash\\hashtableslab\\hashtableslab\\src\\hashfunctions\\customhash4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|solutionrelative:hashtableslab\\src\\hashfunctions\\customhash4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|c:\\users\\user\\projects\\hash\\hashtableslab\\hashtableslab\\src\\hashfunctions\\customhash3.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|solutionrelative:hashtableslab\\src\\hashfunctions\\customhash3.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|c:\\users\\user\\projects\\hash\\hashtableslab\\hashtableslab\\src\\hashfunctions\\customhash2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|solutionrelative:hashtableslab\\src\\hashfunctions\\customhash2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|c:\\users\\user\\projects\\hash\\hashtableslab\\hashtableslab\\src\\hashfunctions\\customhash1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|solutionrelative:hashtableslab\\src\\hashfunctions\\customhash1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|c:\\users\\user\\projects\\hash\\hashtableslab\\hashtableslab\\src\\collisionresolvers\\customresolver1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|solutionrelative:hashtableslab\\src\\collisionresolvers\\customresolver1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|c:\\users\\user\\projects\\hash\\hashtableslab\\hashtableslab\\src\\hashfunctions\\multiplicationhash.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|solutionrelative:hashtableslab\\src\\hashfunctions\\multiplicationhash.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|c:\\users\\user\\projects\\hash\\hashtableslab\\hashtableslab\\src\\hashtables\\openaddressinghashtable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|solutionrelative:hashtableslab\\src\\hashtables\\openaddressinghashtable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|c:\\users\\user\\projects\\hash\\hashtableslab\\hashtableslab\\src\\hashtables\\chainedhashtable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|solutionrelative:hashtableslab\\src\\hashtables\\chainedhashtable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|c:\\users\\user\\projects\\hash\\hashtableslab\\hashtableslab\\src\\core\\models\\hashtableentry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|solutionrelative:hashtableslab\\src\\core\\models\\hashtableentry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|c:\\users\\user\\projects\\hash\\hashtableslab\\hashtableslab\\src\\core\\interfaces\\ihashfunction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|solutionrelative:hashtableslab\\src\\core\\interfaces\\ihashfunction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|c:\\users\\user\\projects\\hash\\hashtableslab\\hashtableslab\\src\\core\\interfaces\\icollisionresolver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|solutionrelative:hashtableslab\\src\\core\\interfaces\\icollisionresolver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|c:\\users\\user\\projects\\hash\\hashtableslab\\hashtableslab\\src\\core\\interfaces\\ihashtable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|solutionrelative:hashtableslab\\src\\core\\interfaces\\ihashtable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|c:\\users\\user\\projects\\hash\\hashtableslab\\hashtableslab\\src\\core\\models\\statistics.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|solutionrelative:hashtableslab\\src\\core\\models\\statistics.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|c:\\users\\user\\projects\\hash\\hashtableslab\\hashtableslab\\src\\core\\enums\\visualizationtype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|solutionrelative:hashtableslab\\src\\core\\enums\\visualizationtype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|c:\\users\\user\\projects\\hash\\hashtableslab\\hashtableslab\\src\\core\\models\\benchmarkresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|solutionrelative:hashtableslab\\src\\core\\models\\benchmarkresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|c:\\users\\user\\projects\\hash\\hashtableslab\\hashtableslab\\src\\core\\enums\\hashmethod.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|solutionrelative:hashtableslab\\src\\core\\enums\\hashmethod.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|c:\\users\\user\\projects\\hash\\hashtableslab\\hashtableslab\\src\\collisionresolvers\\quadraticprobing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|solutionrelative:hashtableslab\\src\\collisionresolvers\\quadraticprobing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|c:\\users\\user\\projects\\hash\\hashtableslab\\hashtableslab\\src\\collisionresolvers\\linearprobing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|solutionrelative:hashtableslab\\src\\collisionresolvers\\linearprobing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|c:\\users\\user\\projects\\hash\\hashtableslab\\hashtableslab\\src\\collisionresolvers\\doublehashing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|solutionrelative:hashtableslab\\src\\collisionresolvers\\doublehashing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|c:\\users\\user\\projects\\hash\\hashtableslab\\hashtableslab\\src\\benchmark\\datagenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|solutionrelative:hashtableslab\\src\\benchmark\\datagenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|c:\\users\\user\\projects\\hash\\hashtableslab\\hashtableslab\\src\\benchmark\\benchmarkrunner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5D01303-63FC-437B-A862-D0D9EDDBB9CE}|HashTablesLab\\HashTablesLab.csproj|solutionrelative:hashtableslab\\src\\benchmark\\benchmarkrunner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "DivisionHash.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\HashFunctions\\DivisionHash.cs",
+              "RelativeDocumentMoniker": "HashTablesLab\\src\\HashFunctions\\DivisionHash.cs",
+              "ToolTip": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\HashFunctions\\DivisionHash.cs",
+              "RelativeToolTip": "HashTablesLab\\src\\HashFunctions\\DivisionHash.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-16T10:36:16.415Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CustomResolver2.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\CollisionResolvers\\CustomResolver2.cs",
+              "RelativeDocumentMoniker": "HashTablesLab\\src\\CollisionResolvers\\CustomResolver2.cs",
+              "ToolTip": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\CollisionResolvers\\CustomResolver2.cs",
+              "RelativeToolTip": "HashTablesLab\\src\\CollisionResolvers\\CustomResolver2.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-16T10:35:51.919Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "HashTablesLab.csproj",
+              "DocumentMoniker": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\HashTablesLab.csproj",
+              "RelativeDocumentMoniker": "HashTablesLab\\HashTablesLab.csproj",
+              "ToolTip": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\HashTablesLab.csproj",
+              "RelativeToolTip": "HashTablesLab\\HashTablesLab.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-12-16T09:46:38.679Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\app\\Program.cs",
+              "RelativeDocumentMoniker": "HashTablesLab\\app\\Program.cs",
+              "ToolTip": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\app\\Program.cs",
+              "RelativeToolTip": "HashTablesLab\\app\\Program.cs",
+              "ViewState": "AgIAAMYEAAAAAAAAAADwvw8FAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-16T09:34:56.439Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ConsoleVisualizer.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\Visualization\\ConsoleVisualizer.cs",
+              "RelativeDocumentMoniker": "HashTablesLab\\src\\Visualization\\ConsoleVisualizer.cs",
+              "ToolTip": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\Visualization\\ConsoleVisualizer.cs",
+              "RelativeToolTip": "HashTablesLab\\src\\Visualization\\ConsoleVisualizer.cs",
+              "ViewState": "AgIAAEsBAAAAAAAAAAAiwG8BAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-16T09:47:25.41Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CustomHash3.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\HashFunctions\\CustomHash3.cs",
+              "RelativeDocumentMoniker": "HashTablesLab\\src\\HashFunctions\\CustomHash3.cs",
+              "ToolTip": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\HashFunctions\\CustomHash3.cs",
+              "RelativeToolTip": "HashTablesLab\\src\\HashFunctions\\CustomHash3.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-16T10:36:14.751Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CustomHash4.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\HashFunctions\\CustomHash4.cs",
+              "RelativeDocumentMoniker": "HashTablesLab\\src\\HashFunctions\\CustomHash4.cs",
+              "ToolTip": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\HashFunctions\\CustomHash4.cs",
+              "RelativeToolTip": "HashTablesLab\\src\\HashFunctions\\CustomHash4.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAowB8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-16T10:36:15.635Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "CustomHash2.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\HashFunctions\\CustomHash2.cs",
+              "RelativeDocumentMoniker": "HashTablesLab\\src\\HashFunctions\\CustomHash2.cs",
+              "ToolTip": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\HashFunctions\\CustomHash2.cs",
+              "RelativeToolTip": "HashTablesLab\\src\\HashFunctions\\CustomHash2.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAxwBgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-16T10:36:13.911Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "CustomHash1.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\HashFunctions\\CustomHash1.cs",
+              "RelativeDocumentMoniker": "HashTablesLab\\src\\HashFunctions\\CustomHash1.cs",
+              "ToolTip": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\HashFunctions\\CustomHash1.cs",
+              "RelativeToolTip": "HashTablesLab\\src\\HashFunctions\\CustomHash1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-16T10:36:12.951Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "CustomResolver1.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\CollisionResolvers\\CustomResolver1.cs",
+              "RelativeDocumentMoniker": "HashTablesLab\\src\\CollisionResolvers\\CustomResolver1.cs",
+              "ToolTip": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\CollisionResolvers\\CustomResolver1.cs",
+              "RelativeToolTip": "HashTablesLab\\src\\CollisionResolvers\\CustomResolver1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-16T10:35:50.631Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "MultiplicationHash.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\HashFunctions\\MultiplicationHash.cs",
+              "RelativeDocumentMoniker": "HashTablesLab\\src\\HashFunctions\\MultiplicationHash.cs",
+              "ToolTip": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\HashFunctions\\MultiplicationHash.cs",
+              "RelativeToolTip": "HashTablesLab\\src\\HashFunctions\\MultiplicationHash.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-16T10:36:17.182Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "OpenAddressingHashTable.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\HashTables\\OpenAddressingHashTable.cs",
+              "RelativeDocumentMoniker": "HashTablesLab\\src\\HashTables\\OpenAddressingHashTable.cs",
+              "ToolTip": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\HashTables\\OpenAddressingHashTable.cs",
+              "RelativeToolTip": "HashTablesLab\\src\\HashTables\\OpenAddressingHashTable.cs",
+              "ViewState": "AgIAAJkAAAAAAAAAAAAqwLMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-16T10:26:02.486Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "ChainedHashTable.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\HashTables\\ChainedHashTable.cs",
+              "RelativeDocumentMoniker": "HashTablesLab\\src\\HashTables\\ChainedHashTable.cs",
+              "ToolTip": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\HashTables\\ChainedHashTable.cs",
+              "RelativeToolTip": "HashTablesLab\\src\\HashTables\\ChainedHashTable.cs",
+              "ViewState": "AgIAAHkAAAAAAAAAAAAqwJMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-16T10:20:22.437Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "HashTableEntry.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\Core\\Models\\HashTableEntry.cs",
+              "RelativeDocumentMoniker": "HashTablesLab\\src\\Core\\Models\\HashTableEntry.cs",
+              "ToolTip": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\Core\\Models\\HashTableEntry.cs",
+              "RelativeToolTip": "HashTablesLab\\src\\Core\\Models\\HashTableEntry.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-16T10:36:07.055Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "IHashFunction.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\Core\\Interfaces\\IHashFunction.cs",
+              "RelativeDocumentMoniker": "HashTablesLab\\src\\Core\\Interfaces\\IHashFunction.cs",
+              "ToolTip": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\Core\\Interfaces\\IHashFunction.cs",
+              "RelativeToolTip": "HashTablesLab\\src\\Core\\Interfaces\\IHashFunction.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-16T10:36:02.254Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "ICollisionResolver.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\Core\\Interfaces\\ICollisionResolver.cs",
+              "RelativeDocumentMoniker": "HashTablesLab\\src\\Core\\Interfaces\\ICollisionResolver.cs",
+              "ToolTip": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\Core\\Interfaces\\ICollisionResolver.cs",
+              "RelativeToolTip": "HashTablesLab\\src\\Core\\Interfaces\\ICollisionResolver.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-16T10:36:01.319Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "IHashTable.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\Core\\Interfaces\\IHashTable.cs",
+              "RelativeDocumentMoniker": "HashTablesLab\\src\\Core\\Interfaces\\IHashTable.cs",
+              "ToolTip": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\Core\\Interfaces\\IHashTable.cs",
+              "RelativeToolTip": "HashTablesLab\\src\\Core\\Interfaces\\IHashTable.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-16T10:24:46.702Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Statistics.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\Core\\Models\\Statistics.cs",
+              "RelativeDocumentMoniker": "HashTablesLab\\src\\Core\\Models\\Statistics.cs",
+              "ToolTip": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\Core\\Models\\Statistics.cs",
+              "RelativeToolTip": "HashTablesLab\\src\\Core\\Models\\Statistics.cs",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAqwGIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-16T09:53:51.204Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "VisualizationType.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\Core\\Enums\\VisualizationType.cs",
+              "RelativeDocumentMoniker": "HashTablesLab\\src\\Core\\Enums\\VisualizationType.cs",
+              "ToolTip": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\Core\\Enums\\VisualizationType.cs",
+              "RelativeToolTip": "HashTablesLab\\src\\Core\\Enums\\VisualizationType.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-16T10:35:59.446Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "BenchmarkResult.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\Core\\Models\\BenchmarkResult.cs",
+              "RelativeDocumentMoniker": "HashTablesLab\\src\\Core\\Models\\BenchmarkResult.cs",
+              "ToolTip": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\Core\\Models\\BenchmarkResult.cs",
+              "RelativeToolTip": "HashTablesLab\\src\\Core\\Models\\BenchmarkResult.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-16T09:53:17.673Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "HashMethod.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\Core\\Enums\\HashMethod.cs",
+              "RelativeDocumentMoniker": "HashTablesLab\\src\\Core\\Enums\\HashMethod.cs",
+              "ToolTip": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\Core\\Enums\\HashMethod.cs",
+              "RelativeToolTip": "HashTablesLab\\src\\Core\\Enums\\HashMethod.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-16T10:35:57.806Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "QuadraticProbing.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\CollisionResolvers\\QuadraticProbing.cs",
+              "RelativeDocumentMoniker": "HashTablesLab\\src\\CollisionResolvers\\QuadraticProbing.cs",
+              "ToolTip": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\CollisionResolvers\\QuadraticProbing.cs",
+              "RelativeToolTip": "HashTablesLab\\src\\CollisionResolvers\\QuadraticProbing.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-16T10:35:54.438Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "LinearProbing.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\CollisionResolvers\\LinearProbing.cs",
+              "RelativeDocumentMoniker": "HashTablesLab\\src\\CollisionResolvers\\LinearProbing.cs",
+              "ToolTip": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\CollisionResolvers\\LinearProbing.cs",
+              "RelativeToolTip": "HashTablesLab\\src\\CollisionResolvers\\LinearProbing.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-16T10:35:53.686Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "DoubleHashing.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\CollisionResolvers\\DoubleHashing.cs",
+              "RelativeDocumentMoniker": "HashTablesLab\\src\\CollisionResolvers\\DoubleHashing.cs",
+              "ToolTip": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\CollisionResolvers\\DoubleHashing.cs",
+              "RelativeToolTip": "HashTablesLab\\src\\CollisionResolvers\\DoubleHashing.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-16T10:35:52.879Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "DataGenerator.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\Benchmark\\DataGenerator.cs",
+              "RelativeDocumentMoniker": "HashTablesLab\\src\\Benchmark\\DataGenerator.cs",
+              "ToolTip": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\Benchmark\\DataGenerator.cs",
+              "RelativeToolTip": "HashTablesLab\\src\\Benchmark\\DataGenerator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-16T10:35:45.129Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "BenchmarkRunner.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\Benchmark\\BenchmarkRunner.cs",
+              "RelativeDocumentMoniker": "HashTablesLab\\src\\Benchmark\\BenchmarkRunner.cs",
+              "ToolTip": "C:\\Users\\user\\Projects\\Hash\\HashTablesLab\\HashTablesLab\\src\\Benchmark\\BenchmarkRunner.cs",
+              "RelativeToolTip": "HashTablesLab\\src\\Benchmark\\BenchmarkRunner.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAAnwDwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-16T10:26:23.226Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

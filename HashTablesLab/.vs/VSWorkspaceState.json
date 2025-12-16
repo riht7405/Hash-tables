@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\HashTablesLab",
+    "\\HashTablesLab\\src",
+    "\\HashTablesLab\\src\\Core",
+    "\\HashTablesLab\\src\\Core\\Enums",
+    "\\HashTablesLab\\src\\Core\\Interfaces",
+    "\\HashTablesLab\\src\\Core\\Models",
+    "\\HashTablesLab\\src\\HashFunctions",
+    "\\HashTablesLab\\src\\HashTables",
+    "\\HashTablesLab\\src\\Visualization"
+  ],
+  "SelectedNode": "\\HashTablesLab.sln",
+  "PreviewInSolutionExplorer": false
+}
