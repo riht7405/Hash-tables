@@ -40,7 +40,7 @@ namespace HashTablesLab.App
                         ShowInteractiveDemo();
                         break;
                     case 3:
-                        ShowVisualizationGallery();
+                        ShowVisualizationMenu();
                         break;
                     case 4:
                         ShowResultsSummary();
@@ -85,7 +85,7 @@ namespace HashTablesLab.App
             Console.WriteLine();
             ShowMenuOption("1️⃣", "Выполнить лабораторную работу", "Автоматический тест всех заданий");
             ShowMenuOption("2️⃣", "Интерактивная демонстрация", "Понятные примеры и объяснения");
-            ShowMenuOption("3️⃣", "Галерея визуализации", "Графики, тепловые карты, гистограммы");
+            ShowMenuOption("3️⃣", "Галерея визуализации", "Интерактивные демонстрации и отчеты");
             ShowMenuOption("4️⃣", "Сводка результатов", "Таблицы сравнения и выводы");
             ShowMenuOption("5️⃣", "Справка и теория", "Объяснение методов и терминов");
             ShowMenuOption("6️⃣", "Выход", "Завершение работы программы");
@@ -398,17 +398,8 @@ namespace HashTablesLab.App
 
                     for (int j = 0; j < elementCount; j++)
                     {
-                        try
-                        {
-                            if (table.Insert(uniqueKeys[j], $"Value_{j}"))
-                                inserted++;
-                        }
-                        catch (InvalidOperationException ex) when (ex.Message.Contains("переполнен") || ex.Message.Contains("Не удалось найти"))
-                        {
-                            // Записываем сколько удалось вставить
-                            Console.WriteLine($"    ⚠️  Переполнение после {inserted} элементов");
-                            break;
-                        }
+                        if (table.Insert(uniqueKeys[j], $"Value_{j}"))
+                            inserted++;
 
                         // Показываем прогресс каждые 10000 элементов
                         if (j % 10000 == 0 && j > 0)
@@ -1282,11 +1273,124 @@ namespace HashTablesLab.App
             ShowPressAnyKey();
         }
 
+        static void DemoComparison()
+        {
+            Console.Clear();
+            ShowSectionHeader("📊 СРАВНЕНИЕ МЕТОДОВ", ConsoleColor.Green);
+
+            Console.WriteLine("\n  Сравнение методов разрешения коллизий:\n");
+
+            // Простая демонстрация
+            Console.WriteLine("  Метод цепочек:");
+            Console.WriteLine("  ──────────────────────────────");
+            Console.WriteLine("  ✅ Плюсы:");
+            Console.WriteLine("     • Простота реализации");
+            Console.WriteLine("     • Неограниченное количество элементов");
+            Console.WriteLine("     • Устойчив к переполнению");
+            Console.WriteLine("  ❌ Минусы:");
+            Console.WriteLine("     • Дополнительная память на указатели");
+            Console.WriteLine("     • Длинные цепочки замедляют поиск");
+
+            Console.WriteLine("\n  Открытая адресация:");
+            Console.WriteLine("  ──────────────────────────────");
+            Console.WriteLine("  ✅ Плюсы:");
+            Console.WriteLine("     • Экономия памяти");
+            Console.WriteLine("     • Локальность данных (кеш-дружелюбность)");
+            Console.WriteLine("     • Простой поиск (последовательный доступ)");
+            Console.WriteLine("  ❌ Минусы:");
+            Console.WriteLine("     • Проблема кластеризации");
+            Console.WriteLine("     • Ограниченный размер таблицы");
+            Console.WriteLine("     • Сложность удаления элементов");
+
+            Console.WriteLine("\n  🎯 ВЫВОД:");
+            Console.WriteLine("  Выбор метода зависит от конкретной задачи:");
+            Console.WriteLine("  • Для словарей и кэшей - метод цепочек");
+            Console.WriteLine("  • Для таблиц символов - открытая адресация");
+            Console.WriteLine("  • Для учебных целей - стоит изучить оба!");
+
+            ShowPressAnyKey();
+        }
+
+        static void ShowTableState(ChainedHashTable<int, string> table, int size)
+        {
+            Console.WriteLine("\n    Индекс │ Элементы");
+            Console.WriteLine("    ────────┼─────────");
+
+            for (int i = 0; i < Math.Min(size, 5); i++)
+            {
+                Console.Write($"    [{i}]    │ ");
+
+                // Простая демонстрация
+                if (i == 0)
+                    Console.WriteLine("10 → 15");
+                else
+                    Console.WriteLine("пусто");
+            }
+        }
+
+        static void ShowChainVisualization(int[] chain)
+        {
+            Console.WriteLine("\n    [0] ───→ 10 ───→ 15");
+            Console.WriteLine("           (цепочка из 2 элементов)");
+        }
+
+        static void ShowSimpleTable(int size)
+        {
+            Console.Write("    ");
+            for (int i = 0; i < size; i++) Console.Write($"[{i}] ");
+            Console.WriteLine();
+
+            Console.Write("    ");
+            for (int i = 0; i < size; i++) Console.Write(" ━  ");
+            Console.WriteLine();
+        }
+
+        static void ShowTableWithElement(int size, int index, string value)
+        {
+            Console.Write("    ");
+            for (int i = 0; i < size; i++)
+            {
+                if (i == index)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write($"[{value}]");
+                    Console.ResetColor();
+                    Console.Write(" ");
+                }
+                else
+                {
+                    Console.Write("[ ] ");
+                }
+            }
+            Console.WriteLine();
+        }
+
+        static void ShowTableWithElements(int size, int[] indices, string[] values)
+        {
+            Console.Write("    ");
+            for (int i = 0; i < size; i++)
+            {
+                int idx = Array.IndexOf(indices, i);
+                if (idx >= 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write($"[{values[idx]}]");
+                    Console.ResetColor();
+                    Console.Write(" ");
+                }
+                else
+                {
+                    Console.Write("[ ] ");
+                }
+            }
+            Console.WriteLine();
+        }
+
         #endregion
 
         #region === ГАЛЕРЕЯ ВИЗУАЛИЗАЦИИ ===
 
-        static void ShowVisualizationGallery()
+        static void ShowVisualizationMenu()
         {
             Console.Clear();
             ShowSectionHeader("🎨 ГАЛЕРЕЯ ВИЗУАЛИЗАЦИИ", ConsoleColor.Magenta);
@@ -1295,210 +1399,737 @@ namespace HashTablesLab.App
             CenterText("Выберите тип визуализации:", 2);
             Console.ResetColor();
 
-            ShowGalleryOption("1", "📊 Распределение цепочек", "Гистограмма длин цепочек");
-            ShowGalleryOption("2", "🔥 Тепловая карта", "Заполнение таблицы цветами");
-            ShowGalleryOption("3", "📈 Сравнительные графики", "Гистограммы результатов");
-            ShowGalleryOption("4", "🎯 Анимация вставки", "Процесс заполнения таблицы");
-            ShowGalleryOption("5", "🔙 Назад", "Возврат в главное меню");
+            ShowMenuOption("1️⃣", "Демонстрация метода цепочек", "Наглядный пример работы цепочек");
+            ShowMenuOption("2️⃣", "Демонстрация открытой адресации", "Визуализация кластеров");
+            ShowMenuOption("3️⃣", "Анимация вставки элемента", "Пошаговая демонстрация вставки");
+            ShowMenuOption("4️⃣", "Тепловая карта заполнения", "Графическое представление распределения");
+            ShowMenuOption("5️⃣", "Генерация HTML-отчета", "Создание интерактивного отчета в браузере");
+            ShowMenuOption("6️⃣", "🔙 Назад", "Возврат в главное меню");
 
-            Console.Write("\n  Выбор (1-5): ");
+            Console.Write("\n  Выбор (1-6): ");
             var choice = Console.ReadLine();
 
             switch (choice)
             {
                 case "1":
-                    ShowChainDistributionGallery();
+                    DemoChainedTable();
                     break;
                 case "2":
-                    ShowHeatmapGallery();
+                    DemoOpenAddressingTable();
                     break;
                 case "3":
-                    ShowComparisonGallery();
+                    DemoInsertionAnimation();
                     break;
                 case "4":
-                    ShowInsertionAnimation();
+                    DemoHeatmap();
+                    break;
+                case "5":
+                    GenerateHtmlReport();
                     break;
                 default:
                     return;
             }
         }
 
-        static void ShowChainDistributionGallery()
+        static void DemoChainedTable()
         {
             Console.Clear();
-            ShowSectionHeader("📊 РАСПРЕДЕЛЕНИЕ ЦЕПОЧЕК", ConsoleColor.Cyan);
+            ShowSectionHeader("🏗️  ДЕМОНСТРАЦИЯ МЕТОДА ЦЕПОЧЕК", ConsoleColor.Cyan);
 
-            Console.WriteLine("\n  Показывает, сколько элементов в каждой ячейке:\n");
-
-            var table = new ChainedHashTable<int, string>(20, new MultiplicationHash());
+            // Создаем небольшую таблицу для демонстрации
+            var table = new ChainedHashTable<int, string>(15, new DivisionHash());
             var random = new Random();
 
-            // Заполняем таблицу
-            for (int i = 0; i < 50; i++)
+            Console.WriteLine("\n  Генерируем и вставляем 20 случайных элементов...\n");
+
+            // Вставляем элементы
+            int inserted = 0;
+            for (int i = 0; i < 20; i++)
             {
-                table.Insert(random.Next(1, 100), $"Value_{i}");
+                int key = random.Next(1, 100);
+                if (table.Insert(key, $"Value_{i}"))
+                {
+                    inserted++;
+                    Console.Write($"  Вставка {i + 1:00}: ключ {key:00} → ");
+
+                    int hash = key % 15;
+                    Console.WriteLine($"индекс {hash}");
+
+                    // Простая анимация
+                    ShowSimpleTableAnimation(15, hash);
+                    Thread.Sleep(100);
+
+                    if (i < 19) Console.SetCursorPosition(0, Console.CursorTop - 2);
+                }
             }
 
-            // Простая визуализация
+            Console.SetCursorPosition(0, Console.CursorTop + 3);
+            Console.WriteLine($"  ✅ Успешно вставлено: {inserted} элементов");
+
+            // Визуализируем таблицу
+            Console.WriteLine("\n  📊 Состояние хеш-таблицы:");
+            Console.WriteLine("  ──────────────────────────────");
+
+            for (int i = 0; i < 15; i++)
+            {
+                Console.Write($"  [{i,2}] → ");
+                if (table.Search(i, out var value))
+                    Console.WriteLine($"Ключ: {value.Replace("Value_", "")}");
+                else
+                    Console.WriteLine("∅");
+            }
+
+            // Статистика
+            var stats = table.GetStatistics();
+            Console.WriteLine("\n  📈 Статистика:");
+            Console.WriteLine($"    • Размер таблицы: 15 ячеек");
+            Console.WriteLine($"    • Элементов: {table.Count}");
+            Console.WriteLine($"    • Коэффициент заполнения: {stats.LoadFactor:P2}");
+            Console.WriteLine($"    • Самая длинная цепочка: {stats.LongestChain}");
+            Console.WriteLine($"    • Пустых ячеек: {stats.EmptyBuckets}");
+
+            // Визуализация цепочек
+            Console.WriteLine("\n  🔗 Визуализация цепочек:");
             var chainLengths = table.GetChainLengths();
-
-            Console.WriteLine("  Длина │ Количество ячеек │ Визуализация");
-            Console.WriteLine("  ──────┼──────────────────┼─────────────");
-
-            var groups = chainLengths.GroupBy(l => l)
-                .OrderBy(g => g.Key)
-                .Take(10); // Показываем только первые 10
-
-            foreach (var group in groups)
+            for (int i = 0; i < chainLengths.Length; i++)
             {
-                int count = group.Count();
-                string bar = new string('█', Math.Min(count, 20));
-
-                Console.Write($"  {group.Key,5} │ {count,16} │ ");
-                Console.ForegroundColor = GetBarColor(count, 20);
-                Console.WriteLine(bar);
-                Console.ResetColor();
+                if (chainLengths[i] > 0)
+                {
+                    Console.Write($"    [{i}]: ");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine(new string('●', chainLengths[i]) + $" ({chainLengths[i]})");
+                    Console.ResetColor();
+                }
             }
-
-            Console.WriteLine("\n  💡 Идеально: большинство ячеек имеют 0-2 элемента");
 
             ShowPressAnyKey();
         }
 
-        static void ShowHeatmapGallery()
+        static void DemoOpenAddressingTable()
         {
             Console.Clear();
-            ShowSectionHeader("🔥 ТЕПЛОВАЯ КАРТА ЗАПОЛНЕНИЯ", ConsoleColor.Red);
+            ShowSectionHeader("🔍 ДЕМОНСТРАЦИЯ ОТКРЫТОЙ АДРЕСАЦИИ", ConsoleColor.Magenta);
 
-            Console.WriteLine("\n  Цвета показывают заполненность ячеек:\n");
-
-            var table = new OpenAddressingHashTable<int, string>(100, new DivisionHash(), new QuadraticProbing());
+            // Создаем таблицу для демонстрации
+            var table = new OpenAddressingHashTable<int, string>(20, new DivisionHash(), new LinearProbing());
             var random = new Random();
 
-            // Заполняем таблицу на 60%
-            for (int i = 0; i < 60; i++)
+            Console.WriteLine("\n  Вставляем 15 элементов в таблицу размером 20...\n");
+
+            // Вставляем элементы
+            for (int i = 0; i < 15; i++)
             {
-                table.Insert(random.Next(1, 200), $"Value_{i}");
+                int key = random.Next(1, 50);
+                try
+                {
+                    if (table.Insert(key, $"Value_{i}"))
+                    {
+                        Console.Write($"  Вставка {i + 1:00}: ключ {key:00} → ");
+
+                        // Показываем поиск ячейки
+                        for (int attempt = 0; attempt < 3; attempt++)
+                        {
+                            int index = (key + attempt) % 20;
+                            Console.Write($"[{index}] ");
+                            Thread.Sleep(50);
+                        }
+                        Console.WriteLine("✓");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"  ❌ Ошибка: {ex.Message}");
+                }
+                Thread.Sleep(100);
             }
 
-            // Простая тепловая карта
-            var occupancyMap = table.GetOccupancyMap();
+            // Визуализируем таблицу
+            Console.WriteLine("\n  📊 Состояние таблицы:");
+            Console.WriteLine("  (занятые ячейки отмечены цветом)");
+            Console.WriteLine("  ──────────────────────────────");
 
-            Console.WriteLine("  Каждый символ = 5 ячеек таблицы:\n");
-
-            int width = 20;
-            int height = 5;
-            int cellsPerBlock = occupancyMap.Length / (width * height);
-
-            for (int y = 0; y < height; y++)
+            int cols = 5;
+            for (int row = 0; row < 4; row++)
             {
-                Console.Write("  ");
-                for (int x = 0; x < width; x++)
+                Console.Write("    ");
+                for (int col = 0; col < cols; col++)
                 {
-                    int startIdx = (y * width + x) * cellsPerBlock;
-                    int occupied = 0;
-
-                    for (int i = 0; i < cellsPerBlock && startIdx + i < occupancyMap.Length; i++)
+                    int idx = row * cols + col;
+                    if (table.Search(idx, out var value))
                     {
-                        if (occupancyMap[startIdx + i]) occupied++;
+                        Console.BackgroundColor = ConsoleColor.Green;
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        string display = value.Replace("Value_", "");
+                        Console.Write($"[{display.PadLeft(2)}]");
+                        Console.ResetColor();
+                        Console.Write(" ");
                     }
-
-                    double ratio = (double)occupied / cellsPerBlock;
-                    Console.ForegroundColor = GetHeatmapColor(ratio);
-                    Console.Write(GetHeatmapChar(ratio));
-                    Console.ResetColor();
+                    else
+                    {
+                        Console.Write($"[  ] ");
+                    }
                 }
                 Console.WriteLine();
             }
 
-            Console.WriteLine("\n  📖 Легенда:");
-            Console.WriteLine("  · - пусто  ░ - мало  ▒ - средне  ▓ - много  █ - полностью");
+            // Статистика
+            var stats = table.GetStatistics();
+            Console.WriteLine("\n  📈 Статистика:");
+            Console.WriteLine($"    • Размер таблицы: 20 ячеек");
+            Console.WriteLine($"    • Элементов: {table.Count}");
+            Console.WriteLine($"    • Коэффициент заполнения: {stats.LoadFactor:P2}");
+            Console.WriteLine($"    • Самый длинный кластер: {stats.LongestCluster}");
+            Console.WriteLine($"    • Пустых ячеек: {stats.EmptyBuckets}");
 
-            ShowPressAnyKey();
-        }
+            // Визуализация кластеров
+            Console.WriteLine("\n  🔍 Поиск самого длинного кластера...");
+            int longestCluster = table.CalculateLongestCluster();
+            Console.WriteLine($"    Самый длинный кластер: {longestCluster} ячеек");
 
-        static void ShowComparisonGallery()
-        {
-            if (_task1Results.Count == 0 && _task2Results.Count == 0)
+            if (longestCluster > 0)
             {
-                Console.Clear();
-                ShowSectionHeader("📈 СРАВНИТЕЛЬНЫЕ ГРАФИКИ", ConsoleColor.Yellow);
-                Console.WriteLine("\n  ⚠️  Сначала выполните лабораторную работу!");
-                ShowPressAnyKey();
-                return;
-            }
-
-            Console.Clear();
-            ShowSectionHeader("📈 СРАВНИТЕЛЬНЫЕ ГРАФИКИ", ConsoleColor.Yellow);
-
-            if (_task1Results.Count > 0)
-            {
-                Console.WriteLine("\n  🏗️  ХЕШ-ФУНКЦИИ (метод цепочек):");
-                Console.WriteLine("  Метрика: длина самой длинной цепочки (меньше = лучше)\n");
-
-                foreach (var result in _task1Results.OrderBy(r => r.Statistics.LongestChain))
-                {
-                    int value = result.Statistics.LongestChain;
-                    string name = result.TestName.PadRight(20).Substring(0, 20);
-                    string bar = new string('█', Math.Min(value * 2, 30));
-
-                    Console.Write($"  {name} │ ");
-                    Console.ForegroundColor = GetPerformanceColor(value, "chain");
-                    Console.WriteLine($"{bar} {value}");
-                    Console.ResetColor();
-                }
-            }
-
-            if (_task2Results.Count > 0)
-            {
-                Console.WriteLine("\n  🔍 МЕТОДЫ РАЗРЕШЕНИЯ (открытая адресация):");
-                Console.WriteLine("  Метрика: длина самого длинного кластера (меньше = лучше)\n");
-
-                foreach (var result in _task2Results.OrderBy(r => r.Statistics.LongestCluster))
-                {
-                    int value = result.Statistics.LongestCluster;
-                    string name = result.TestName.PadRight(25).Substring(0, 25);
-                    string bar = new string('█', Math.Min(value, 30));
-
-                    Console.Write($"  {name} │ ");
-                    Console.ForegroundColor = GetPerformanceColor(value, "cluster");
-                    Console.WriteLine($"{bar} {value}");
-                    Console.ResetColor();
-                }
+                Console.Write("    Визуализация: ");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(new string('█', Math.Min(longestCluster, 20)));
+                Console.ResetColor();
+                Console.WriteLine("    (это последовательные занятые ячейки)");
             }
 
             ShowPressAnyKey();
         }
 
-        static void ShowInsertionAnimation()
+        static void DemoInsertionAnimation()
         {
             Console.Clear();
-            ShowSectionHeader("🎯 АНИМАЦИЯ ВСТАВКИ ЭЛЕМЕНТОВ", ConsoleColor.Green);
+            ShowSectionHeader("🎬 АНИМАЦИЯ ВСТАВКИ ЭЛЕМЕНТА", ConsoleColor.Green);
 
-            Console.WriteLine("\n  Процесс заполнения таблицы методом цепочек:\n");
+            Console.WriteLine("\n  Демонстрация процесса вставки элемента в хеш-таблицу");
+            Console.WriteLine("  ──────────────────────────────────────────────\n");
 
             var table = new ChainedHashTable<int, string>(10, new DivisionHash());
             var random = new Random();
 
-            for (int i = 0; i < 20; i++)
+            // Очищаем место для анимации
+            int animationStartLine = Console.CursorTop;
+
+            // Демонстрация 3 вставок
+            for (int demo = 0; demo < 3; demo++)
             {
-                int key = random.Next(1, 100);
-                table.Insert(key, $"Element_{i}");
+                // Сохраняем позицию для текущей демонстрации
+                int demoStartLine = Console.CursorTop;
 
-                Console.Write($"  Вставка элемента {i + 1:00}: ключ {key:00} → ");
+                int key = random.Next(1, 30);
+                string value = $"Demo_{demo}";
 
+                Console.WriteLine($"\n  🎯 Вставка #{demo + 1}:");
+                Console.WriteLine($"    Ключ: {key}");
+                Console.WriteLine($"    Значение: {value}");
+
+                // Оставляем пустые строки для таблицы
+                Console.WriteLine("\n    Текущее состояние таблицы:");
+                Console.WriteLine("    ───────────────────────────");
+
+                // Выводим начальное состояние таблицы
+                var chainLengths = table.GetChainLengths();
+                for (int i = 0; i < chainLengths.Length; i++)
+                {
+                    Console.WriteLine($"      [{i}]: ∅");
+                }
+
+                // Шаг 1: Вычисление хеша
+                Console.SetCursorPosition(0, demoStartLine + 3);
+                Console.Write("    Шаг 1: Вычисляем хеш...");
+                Thread.Sleep(500);
                 int hash = key % 10;
-                Console.WriteLine($"индекс {hash}");
+                Console.WriteLine($" hash({key}) = {hash}");
 
-                // Простая анимация
-                ShowSimpleTableAnimation(10, hash);
-                Thread.Sleep(300);
+                // Шаг 2: Определение индекса
+                Console.Write("    Шаг 2: Определяем индекс...");
+                Thread.Sleep(500);
+                int index = hash % 10;
+                Console.WriteLine($" {hash} % 10 = {index}");
 
-                if (i < 19) Console.SetCursorPosition(0, Console.CursorTop - 2);
+                // Шаг 3: Вставка с анимацией
+                Console.Write($"    Шаг 3: Проверяем ячейку [{index}]...");
+                Thread.Sleep(500);
+
+                bool inserted = table.Insert(key, value);
+
+                if (inserted)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine(" СВОБОДНО → вставляем ✓");
+                    Console.ResetColor();
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine(" ЗАНЯТО → создаем цепочку ⛓️");
+                    Console.ResetColor();
+                }
+
+                Thread.Sleep(1000);
+
+                // Обновляем отображение таблицы
+                Console.SetCursorPosition(0, demoStartLine + 5);
+                Console.WriteLine("    Текущее состояние таблицы:");
+                Console.WriteLine("    ───────────────────────────");
+
+                chainLengths = table.GetChainLengths();
+                for (int i = 0; i < chainLengths.Length; i++)
+                {
+                    Console.Write($"      [{i}]: ");
+                    if (chainLengths[i] > 0)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.Write(new string('●', chainLengths[i]));
+                        Console.ResetColor();
+                        Console.WriteLine($" ({chainLengths[i]})");
+                    }
+                    else
+                    {
+                        Console.WriteLine("∅");
+                    }
+                }
+
+                if (demo < 2)
+                {
+                    Console.WriteLine("\n  ⏭️  Переходим к следующей вставке...");
+                    Thread.Sleep(2000);
+
+                    // Очищаем область для следующей демонстрации
+                    int linesToClear = Console.CursorTop - demoStartLine;
+                    Console.SetCursorPosition(0, demoStartLine);
+                    for (int i = 0; i < linesToClear; i++)
+                    {
+                        Console.WriteLine(new string(' ', Console.WindowWidth));
+                    }
+                    Console.SetCursorPosition(0, demoStartLine);
+                }
             }
 
-            Console.SetCursorPosition(0, Console.CursorTop + 3);
-            Console.WriteLine("  🎬 Анимация завершена!");
+            // Финальное отображение
+            Console.WriteLine("\n\n  🎉 Анимация завершена!");
+            Console.WriteLine("  В таблицу успешно вставлены 3 элемента.");
+
+            // Показываем итоговую статистику
+            var finalStats = table.GetStatistics();
+            Console.WriteLine("\n  📊 Итоговая статистика:");
+            Console.WriteLine($"    • Размер таблицы: 10 ячеек");
+            Console.WriteLine($"    • Элементов: {table.Count}");
+            Console.WriteLine($"    • Коэффициент заполнения: {finalStats.LoadFactor:P2}");
+            Console.WriteLine($"    • Самая длинная цепочка: {finalStats.LongestChain}");
+            Console.WriteLine($"    • Пустых ячеек: {finalStats.EmptyBuckets}");
+
+            ShowPressAnyKey();
+        }
+
+        static void DemoHeatmap()
+        {
+            Console.Clear();
+            ShowSectionHeader("🔥 ТЕПЛОВАЯ КАРТА ЗАПОЛНЕНИЯ", ConsoleColor.Red);
+
+            Console.WriteLine("\n  Визуализация распределения элементов в хеш-таблице");
+            Console.WriteLine("  ──────────────────────────────────────────────────────\n");
+
+            // Создаем таблицу с разными методами для сравнения
+            Console.WriteLine("  Тестируем 2 метода с одинаковыми данными:\n");
+
+            // Метод 1: Линейное исследование
+            Console.WriteLine("  1. Открытая адресация (линейное исследование)");
+            var table1 = new OpenAddressingHashTable<int, string>(100, new DivisionHash(), new LinearProbing());
+            var random = new Random();
+
+            Console.Write("     Заполняем на 70%... ");
+            int inserted1 = 0;
+            for (int i = 0; i < 70; i++)
+            {
+                try
+                {
+                    if (table1.Insert(random.Next(1, 200), $"Value_{i}"))
+                        inserted1++;
+                }
+                catch
+                {
+                    break;
+                }
+            }
+            Console.WriteLine($"✅ ({inserted1} элементов)");
+
+            var stats1 = table1.GetStatistics();
+            Console.WriteLine($"     • Самый длинный кластер: {stats1.LongestCluster}");
+            Console.WriteLine($"     • Пустых ячеек: {stats1.EmptyBuckets}");
+
+            // Метод 2: Метод цепочек
+            Console.WriteLine("\n  2. Метод цепочек");
+            var table2 = new ChainedHashTable<int, string>(100, new DivisionHash());
+
+            Console.Write("     Заполняем на 70%... ");
+            int inserted2 = 0;
+            for (int i = 0; i < 70; i++)
+            {
+                if (table2.Insert(random.Next(1, 200), $"Value_{i}"))
+                    inserted2++;
+            }
+            Console.WriteLine($"✅ ({inserted2} элементов)");
+
+            var stats2 = table2.GetStatistics();
+            Console.WriteLine($"     • Самая длинная цепочка: {stats2.LongestChain}");
+            Console.WriteLine($"     • Пустых ячеек: {stats2.EmptyBuckets}");
+
+            Console.WriteLine("\n  🔥 ТЕПЛОВЫЕ КАРТЫ:");
+            Console.WriteLine("  ──────────────────────────────────────────────────────");
+
+            // Тепловая карта для открытой адресации
+            Console.WriteLine("\n  📍 Открытая адресация:");
+            Console.WriteLine("  Каждый символ = 2 ячейки таблицы (всего 100 ячеек)");
+            Console.WriteLine("  Цвет показывает заполненность области:\n");
+
+            var occupancyMap1 = table1.GetOccupancyMap();
+            DrawHeatmapWithLegend(occupancyMap1, "Линейное исследование");
+
+            // Анализ
+            Console.WriteLine("\n  📊 АНАЛИЗ ОТКРЫТОЙ АДРЕСАЦИИ:");
+            if (stats1.LongestCluster > 15)
+            {
+                Console.WriteLine("    ❗ Обнаружена СИЛЬНАЯ КЛАСТЕРИЗАЦИЯ");
+                Console.WriteLine("    • Длинные кластеры замедляют поиск");
+                Console.WriteLine("    • Рекомендуется использовать другой метод разрешения");
+            }
+            else if (stats1.LongestCluster > 8)
+            {
+                Console.WriteLine("    ⚠️  Обнаружена УМЕРЕННАЯ кластеризация");
+                Console.WriteLine("    • Это нормально для линейного исследования");
+                Console.WriteLine("    • Можно попробовать квадратичное или двойное хеширование");
+            }
+            else
+            {
+                Console.WriteLine("    ✅ ХОРОШЕЕ распределение");
+                Console.WriteLine("    • Минимальная кластеризация");
+                Console.WriteLine("    • Линейное исследование работает эффективно");
+            }
+
+            // Тепловая карта для метода цепочек
+            Console.WriteLine("\n\n  ⛓️  Метод цепочек:");
+            Console.WriteLine("  Каждый символ = 1 ячейка таблицы (всего 100 ячеек)");
+            Console.WriteLine("  Цвет показывает длину цепочки в ячейке:\n");
+
+            var chainLengths = table2.GetChainLengths();
+            DrawChainHeatmap(chainLengths);
+
+            // Анализ
+            Console.WriteLine("\n  📊 АНАЛИЗ МЕТОДА ЦЕПОЧЕК:");
+            if (stats2.LongestChain > 5)
+            {
+                Console.WriteLine("    ❗ Обнаружены ДЛИННЫЕ ЦЕПОЧКИ");
+                Console.WriteLine("    • Поиск в длинных цепочках замедлен");
+                Console.WriteLine("    • Рекомендуется улучшить хеш-функцию");
+            }
+            else if (stats2.LongestChain > 3)
+            {
+                Console.WriteLine("    ⚠️  НЕКОТОРЫЕ длинные цепочки");
+                Console.WriteLine("    • Распределение удовлетворительное");
+                Console.WriteLine("    • Можно рассмотреть оптимизацию");
+            }
+            else
+            {
+                Console.WriteLine("    ✅ ОТЛИЧНОЕ распределение");
+                Console.WriteLine("    • Короткие цепочки обеспечивают быстрый поиск");
+                Console.WriteLine("    • Хеш-функция работает эффективно");
+            }
+
+            Console.WriteLine("\n  💡 ВЫВОД:");
+            Console.WriteLine("  Тепловая карта помогает визуально оценить:");
+            Console.WriteLine("  • Равномерность распределения элементов");
+            Console.WriteLine("  • Наличие кластеров (для открытой адресации)");
+            Console.WriteLine("  • Длины цепочек (для метода цепочек)");
+            Console.WriteLine("  • Эффективность хеш-функции");
+
+            ShowPressAnyKey();
+        }
+
+        static void DrawHeatmapWithLegend(bool[] occupancyMap, string title)
+        {
+            int width = 25; // 25 символов ширины
+            int height = 4; // 4 строки = 100 ячеек (25×4=100)
+
+            Console.WriteLine($"  {title}:");
+            Console.WriteLine("  " + new string('▁', width + 2));
+
+            for (int y = 0; y < height; y++)
+            {
+                Console.Write("  ▏");
+                for (int x = 0; x < width; x++)
+                {
+                    int idx = y * width + x;
+                    if (idx < occupancyMap.Length)
+                    {
+                        bool occupied = occupancyMap[idx];
+                        Console.ForegroundColor = occupied ? ConsoleColor.Red : ConsoleColor.DarkGray;
+                        Console.Write(occupied ? "█" : "·");
+                        Console.ResetColor();
+                    }
+                    else
+                    {
+                        Console.Write(" ");
+                    }
+                }
+                Console.WriteLine("▕");
+            }
+
+            Console.WriteLine("  " + new string('▔', width + 2));
+
+            // Легенда
+            Console.WriteLine("\n  📖 Легенда:");
+            Console.Write("    ");
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.Write("·");
+            Console.ResetColor();
+            Console.WriteLine(" - пустая ячейка");
+
+            Console.Write("    ");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write("█");
+            Console.ResetColor();
+            Console.WriteLine(" - занятая ячейка");
+
+            Console.WriteLine("\n  📐 Масштаб: 1 символ = 1 ячейка таблицы");
+        }
+
+        static void DrawChainHeatmap(int[] chainLengths)
+        {
+            int width = 10; // 10 столбцов
+            int height = 10; // 10 строк = 100 ячеек
+
+            Console.WriteLine("  " + new string('▁', width + 2));
+
+            for (int y = 0; y < height; y++)
+            {
+                Console.Write("  ▏");
+                for (int x = 0; x < width; x++)
+                {
+                    int idx = y * width + x;
+                    if (idx < chainLengths.Length)
+                    {
+                        int length = chainLengths[idx];
+                        Console.ForegroundColor = GetChainHeatmapColor(length);
+                        Console.Write(GetChainHeatmapChar(length));
+                        Console.ResetColor();
+                    }
+                    else
+                    {
+                        Console.Write(" ");
+                    }
+                }
+                Console.WriteLine("▕");
+            }
+
+            Console.WriteLine("  " + new string('▔', width + 2));
+
+            // Легенда для цепочек
+            Console.WriteLine("\n  📖 Легенда (длина цепочки):");
+            Console.WriteLine("    0    1    2    3    4+");
+            Console.Write("    ");
+            Console.ForegroundColor = ConsoleColor.DarkGray; Console.Write("·");
+            Console.ForegroundColor = ConsoleColor.Green; Console.Write("░");
+            Console.ForegroundColor = ConsoleColor.Yellow; Console.Write("▒");
+            Console.ForegroundColor = ConsoleColor.Red; Console.Write("▓");
+            Console.ResetColor();
+            Console.WriteLine();
+        }
+
+        static ConsoleColor GetChainHeatmapColor(int length)
+        {
+            return length switch
+            {
+                0 => ConsoleColor.DarkGray,
+                1 => ConsoleColor.Green,
+                2 => ConsoleColor.Yellow,
+                3 => ConsoleColor.DarkYellow,
+                _ => ConsoleColor.Red
+            };
+        }
+
+        static char GetChainHeatmapChar(int length)
+        {
+            return length switch
+            {
+                0 => '·',
+                1 => '░',
+                2 => '▒',
+                3 => '▓',
+                _ => '█'
+            };
+        }
+        static void ShowSimpleTableAnimation(int size, int activeIndex)
+        {
+            Console.Write("    ");
+            for (int i = 0; i < size; i++)
+            {
+                if (i == activeIndex)
+                {
+                    Console.BackgroundColor = ConsoleColor.Green;
+                    Console.ForegroundColor = ConsoleColor.Black;
+                    Console.Write("█ ");
+                    Console.ResetColor();
+                }
+                else
+                {
+                    Console.Write(". ");
+                }
+            }
+            Console.WriteLine();
+        }
+
+        static void GenerateHtmlReport()
+        {
+            Console.Clear();
+            ShowSectionHeader("🌐 ГЕНЕРАЦИЯ HTML-ОТЧЕТА", ConsoleColor.Cyan);
+
+            Console.WriteLine("\n  Создание интерактивного отчета для браузера\n");
+            Console.WriteLine("  ⚙️  Настройка параметров отчета:");
+            Console.WriteLine("  ──────────────────────────────────\n");
+
+            // Выбор типа таблицы
+            Console.WriteLine("  1. Выберите тип хеш-таблицы:");
+            Console.WriteLine("     [1] Метод цепочек");
+            Console.WriteLine("     [2] Открытая адресация");
+            Console.Write("     Ваш выбор (1-2): ");
+            string tableTypeChoice = Console.ReadLine();
+
+            // Выбор хеш-функции
+            Console.WriteLine("\n  2. Выберите хеш-функцию:");
+            Console.WriteLine("     [1] Метод деления");
+            Console.WriteLine("     [2] Метод умножения");
+            Console.WriteLine("     [3] Custom 1 (XOR сдвиг)");
+            Console.WriteLine("     [4] Custom 2 (FNV-1a inspired)");
+            Console.WriteLine("     [5] Custom 3 (Многочленный)");
+            Console.WriteLine("     [6] Custom 4 (MD5-like)");
+            Console.Write("     Ваш выбор (1-6): ");
+            string hashChoice = Console.ReadLine();
+
+            // Размер таблицы
+            Console.Write("\n  3. Размер таблицы (по умолчанию 100): ");
+            string sizeInput = Console.ReadLine();
+            int tableSize = string.IsNullOrEmpty(sizeInput) ? 100 : int.Parse(sizeInput);
+
+            // Количество элементов
+            Console.Write("  4. Количество элементов для вставки (по умолчанию 70): ");
+            string countInput = Console.ReadLine();
+            int elementCount = string.IsNullOrEmpty(countInput) ? 70 : int.Parse(countInput);
+
+            // Название отчета
+            Console.Write("  5. Название отчета (по умолчанию 'Анализ хеш-таблицы'): ");
+            string reportTitle = Console.ReadLine();
+            if (string.IsNullOrEmpty(reportTitle))
+                reportTitle = "Анализ хеш-таблицы";
+
+            Console.WriteLine("\n  ⚡ Генерация отчета...");
+
+            try
+            {
+                IHashFunction<int> hashFunction = hashChoice switch
+                {
+                    "2" => new MultiplicationHash(),
+                    "3" => new CustomHash1(),
+                    "4" => new CustomHash2(),
+                    "5" => new CustomHash3(),
+                    "6" => new CustomHash4(),
+                    _ => new DivisionHash()
+                };
+
+                string html = "";
+
+                if (tableTypeChoice == "2")
+                {
+                    // Открытая адресация
+                    Console.Write("  Выберите метод разрешения коллизий [1-линейное, 2-квадратичное, 3-двойное]: ");
+                    string resolverChoice = Console.ReadLine();
+
+                    ICollisionResolver resolver = resolverChoice switch
+                    {
+                        "2" => new QuadraticProbing(),
+                        "3" => new DoubleHashing(),
+                        _ => new LinearProbing()
+                    };
+
+                    var table = new OpenAddressingHashTable<int, string>(tableSize, hashFunction, resolver);
+                    var random = new Random();
+
+                    Console.Write($"  Вставляем {elementCount} элементов... ");
+                    for (int i = 0; i < elementCount; i++)
+                    {
+                        try
+                        {
+                            table.Insert(random.Next(1, tableSize * 3), $"Element_{i}");
+                        }
+                        catch
+                        {
+                            break;
+                        }
+                    }
+                    Console.WriteLine("✅");
+
+                    html = HtmlVisualizer.GenerateOpenAddressingReport(table, hashFunction, resolver, reportTitle);
+                }
+                else
+                {
+                    // Метод цепочек
+                    var table = new ChainedHashTable<int, string>(tableSize, hashFunction);
+                    var random = new Random();
+
+                    Console.Write($"  Вставляем {elementCount} элементов... ");
+                    for (int i = 0; i < elementCount; i++)
+                    {
+                        table.Insert(random.Next(1, tableSize * 3), $"Element_{i}");
+                    }
+                    Console.WriteLine("✅");
+
+                    html = HtmlVisualizer.GenerateChainedReport(table, hashFunction, reportTitle);
+                }
+
+                // Сохранение отчета
+                Console.Write("  Сохраняем отчет... ");
+                string fileName = $"hash_report_{DateTime.Now:yyyyMMdd_HHmmss}.html";
+                HtmlVisualizer.SaveHtmlReport(html, fileName);
+
+                Console.WriteLine("✅\n");
+
+                Console.WriteLine("  🎉 ОТЧЕТ УСПЕШНО СОЗДАН!");
+                Console.WriteLine($"  📁 Файл: {fileName}");
+                Console.WriteLine($"  📊 Тип таблицы: {(tableTypeChoice == "2" ? "Открытая адресация" : "Метод цепочек")}");
+                Console.WriteLine($"  🔑 Хеш-функция: {hashFunction.Name}");
+                Console.WriteLine($"  📏 Размер таблицы: {tableSize} ячеек");
+                Console.WriteLine($"  🔢 Элементов: {elementCount}");
+
+                Console.WriteLine("\n  🚀 Действия:");
+                Console.WriteLine("  1. Откройте файл в браузере");
+                Console.WriteLine("  2. Для сравнения создайте несколько отчетов с разными параметрами");
+                Console.WriteLine("  3. Используйте отчет для анализа эффективности методов");
+
+                // Открыть в браузере?
+                Console.Write("\n  🌐 Открыть отчет в браузере сейчас? (Да/Нет): ");
+                if (Console.ReadLine()?.ToLower().StartsWith("д") ?? false)
+                {
+                    try
+                    {
+                        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                        {
+                            FileName = fileName,
+                            UseShellExecute = true
+                        });
+                    }
+                    catch
+                    {
+                        Console.WriteLine("  ⚠️  Не удалось открыть браузер. Откройте файл вручную.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"\n  ❌ Ошибка: {ex.Message}");
+                Console.WriteLine("  Проверьте введенные параметры и попробуйте снова.");
+            }
 
             ShowPressAnyKey();
         }
@@ -1611,100 +2242,6 @@ namespace HashTablesLab.App
             Console.ResetColor();
         }
 
-        static void ShowTableState(ChainedHashTable<int, string> table, int size)
-        {
-            Console.WriteLine("\n    Индекс │ Элементы");
-            Console.WriteLine("    ────────┼─────────");
-
-            for (int i = 0; i < Math.Min(size, 5); i++)
-            {
-                Console.Write($"    [{i}]    │ ");
-
-                // Простая демонстрация
-                if (i == 0)
-                    Console.WriteLine("10 → 15");
-                else
-                    Console.WriteLine("пусто");
-            }
-        }
-
-        static void ShowChainVisualization(int[] chain)
-        {
-            Console.WriteLine("\n    [0] ───→ 10 ───→ 15");
-            Console.WriteLine("           (цепочка из 2 элементов)");
-        }
-
-        static void ShowSimpleTable(int size)
-        {
-            Console.Write("    ");
-            for (int i = 0; i < size; i++) Console.Write($"[{i}] ");
-            Console.WriteLine();
-
-            Console.Write("    ");
-            for (int i = 0; i < size; i++) Console.Write(" ━  ");
-            Console.WriteLine();
-        }
-
-        static void ShowTableWithElement(int size, int index, string value)
-        {
-            Console.Write("    ");
-            for (int i = 0; i < size; i++)
-            {
-                if (i == index)
-                {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.Write($"[{value}]");
-                    Console.ResetColor();
-                    Console.Write(" ");
-                }
-                else
-                {
-                    Console.Write("[ ] ");
-                }
-            }
-            Console.WriteLine();
-        }
-
-        static void ShowTableWithElements(int size, int[] indices, string[] values)
-        {
-            Console.Write("    ");
-            for (int i = 0; i < size; i++)
-            {
-                int idx = Array.IndexOf(indices, i);
-                if (idx >= 0)
-                {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.Write($"[{values[idx]}]");
-                    Console.ResetColor();
-                    Console.Write(" ");
-                }
-                else
-                {
-                    Console.Write("[ ] ");
-                }
-            }
-            Console.WriteLine();
-        }
-
-        static void ShowSimpleTableAnimation(int size, int activeIndex)
-        {
-            Console.Write("    ");
-            for (int i = 0; i < size; i++)
-            {
-                if (i == activeIndex)
-                {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.Write("█ ");
-                    Console.ResetColor();
-                }
-                else
-                {
-                    Console.Write(". ");
-                }
-            }
-            Console.WriteLine();
-        }
-
         static string GetShortFunctionName(IHashFunction<int> function)
         {
             return function switch
@@ -1793,28 +2330,6 @@ namespace HashTablesLab.App
                 < 0.5 => ConsoleColor.Yellow,
                 < 0.75 => ConsoleColor.DarkYellow,
                 _ => ConsoleColor.Red
-            };
-        }
-
-        static ConsoleColor GetHeatmapColor(double ratio)
-        {
-            return ratio switch
-            {
-                < 0.25 => ConsoleColor.DarkBlue,
-                < 0.5 => ConsoleColor.Blue,
-                < 0.75 => ConsoleColor.Green,
-                _ => ConsoleColor.Red
-            };
-        }
-
-        static char GetHeatmapChar(double ratio)
-        {
-            return ratio switch
-            {
-                < 0.25 => '·',
-                < 0.5 => '░',
-                < 0.75 => '▒',
-                _ => '▓'
             };
         }
 
@@ -1958,44 +2473,6 @@ namespace HashTablesLab.App
             Console.Write($"    • {term,-20}");
             Console.ResetColor();
             Console.WriteLine($"— {description}");
-        }
-
-        static void DemoComparison()
-        {
-            Console.Clear();
-            ShowSectionHeader("📊 СРАВНЕНИЕ МЕТОДОВ", ConsoleColor.Green);
-
-            Console.WriteLine("\n  Сравнение методов разрешения коллизий:\n");
-
-            // Простая демонстрация
-            Console.WriteLine("  Метод цепочек:");
-            Console.WriteLine("  ──────────────────────────────");
-            Console.WriteLine("  ✅ Плюсы:");
-            Console.WriteLine("     • Простота реализации");
-            Console.WriteLine("     • Неограниченное количество элементов");
-            Console.WriteLine("     • Устойчив к переполнению");
-            Console.WriteLine("  ❌ Минусы:");
-            Console.WriteLine("     • Дополнительная память на указатели");
-            Console.WriteLine("     • Длинные цепочки замедляют поиск");
-
-            Console.WriteLine("\n  Открытая адресация:");
-            Console.WriteLine("  ──────────────────────────────");
-            Console.WriteLine("  ✅ Плюсы:");
-            Console.WriteLine("     • Экономия памяти");
-            Console.WriteLine("     • Локальность данных (кеш-дружелюбность)");
-            Console.WriteLine("     • Простой поиск (последовательный доступ)");
-            Console.WriteLine("  ❌ Минусы:");
-            Console.WriteLine("     • Проблема кластеризации");
-            Console.WriteLine("     • Ограниченный размер таблицы");
-            Console.WriteLine("     • Сложность удаления элементов");
-
-            Console.WriteLine("\n  🎯 ВЫВОД:");
-            Console.WriteLine("  Выбор метода зависит от конкретной задачи:");
-            Console.WriteLine("  • Для словарей и кэшей - метод цепочек");
-            Console.WriteLine("  • Для таблиц символов - открытая адресация");
-            Console.WriteLine("  • Для учебных целей - стоит изучить оба!");
-
-            ShowPressAnyKey();
         }
 
         #endregion

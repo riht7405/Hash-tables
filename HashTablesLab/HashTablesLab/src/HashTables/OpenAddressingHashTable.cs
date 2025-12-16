@@ -1,4 +1,4 @@
-using HashTablesLab.Core.Interfaces;
+﻿using HashTablesLab.Core.Interfaces;
 using System;
 using System.Collections.Generic;
 
@@ -54,18 +54,18 @@ namespace HashTablesLab.HashTables
         {
             var watch = System.Diagnostics.Stopwatch.StartNew();
 
-            // ������� ����������� 75% ��� ����������� ���������� �������
+            // Убираем ограничение 75% для возможности заполнения таблицы
             if (_count >= _table.Length)
             {
                 watch.Stop();
-                throw new InvalidOperationException("������� �����������");
+                throw new InvalidOperationException("Таблица переполнена");
             }
 
             for (int i = 0; i < _table.Length; i++)
             {
                 int index = _resolver.Resolve(_hashFunction.Calculate(key, _table.Length), i, _table.Length);
 
-                // ������� �����
+                // Считаем пробу
                 _probeCount++;
 
                 if (_table[index] == null || _table[index].Status == EntryStatus.Empty ||
@@ -84,17 +84,17 @@ namespace HashTablesLab.HashTables
                 {
                     watch.Stop();
                     _totalInsertionTimeMs += (int)watch.ElapsedMilliseconds;
-                    return false; // ���� ��� ����������
+                    return false; // Ключ уже существует
                 }
 
-                // �������� ��� ������� �������
+                // Коллизия при попытке вставки
                 if (i > 0)
                     _collisionCount++;
             }
 
             watch.Stop();
             _totalInsertionTimeMs += (int)watch.ElapsedMilliseconds;
-            throw new InvalidOperationException("�� ������� ����� ��������� ������");
+            throw new InvalidOperationException("Не удалось найти свободную ячейку");
         }
 
         public bool Search(TKey key, out TValue value)
@@ -150,6 +150,117 @@ namespace HashTablesLab.HashTables
             _totalInsertionTimeMs = 0;
         }
 
+        public int GetTableSize() => _table.Length;
+
+        public int CalculateLongestCluster()
+        {
+            int longestCluster = 0;
+            int currentCluster = 0;
+
+            for (int i = 0; i < _table.Length; i++)
+            {
+                if (_table[i] == null || _table[i].Status != EntryStatus.Occupied)
+                {
+                    if (currentCluster > longestCluster)
+                        longestCluster = currentCluster;
+                    currentCluster = 0;
+                }
+                else
+                {
+                    currentCluster++;
+                }
+            }
+
+            if (currentCluster > longestCluster)
+                longestCluster = currentCluster;
+
+            return longestCluster;
+        }
+
+        public void PrintTableState()
+        {
+            Console.WriteLine("\n═══════════════════════════════════════════════");
+            Console.WriteLine($"Хеш-таблица (открытая адресация) | Размер: {_table.Length}");
+            Console.WriteLine($"Элементов: {_count} | Заполнение: {LoadFactor:P2}");
+            Console.WriteLine($"Самый длинный кластер: {CalculateLongestCluster()}");
+            Console.WriteLine("═══════════════════════════════════════════════\n");
+
+            int cols = 10;
+            int rows = (int)Math.Ceiling((double)_table.Length / cols);
+
+            for (int row = 0; row < rows; row++)
+            {
+                Console.Write("    ");
+                for (int col = 0; col < cols; col++)
+                {
+                    int idx = row * cols + col;
+                    if (idx >= _table.Length) break;
+
+                    if (_table[idx] == null || _table[idx].Status != EntryStatus.Occupied)
+                    {
+                        Console.Write("[  ] ");
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        string keyStr = _table[idx].Key.ToString();
+                        string display = keyStr.Length > 2 ? keyStr.Substring(0, 2) : keyStr.PadLeft(2);
+                        Console.Write($"[{display}] ");
+                        Console.ResetColor();
+                    }
+                }
+                Console.WriteLine();
+            }
+        }
+
+        public void PrintHeatmap()
+        {
+            Console.WriteLine("\n🔥 Тепловая карта заполнения таблицы:");
+            Console.WriteLine("  Пусто [ ]  Мало [░]  Средне [▒]  Много [▓]  Полно [█]\n");
+
+            int blockSize = Math.Max(1, _table.Length / 50); // 50 символов для визуализации
+
+            for (int i = 0; i < _table.Length; i += blockSize)
+            {
+                int occupiedCount = 0;
+                for (int j = 0; j < blockSize && i + j < _table.Length; j++)
+                {
+                    if (_table[i + j] != null && _table[i + j].Status == EntryStatus.Occupied)
+                        occupiedCount++;
+                }
+
+                double ratio = (double)occupiedCount / blockSize;
+                Console.ForegroundColor = GetHeatmapColor(ratio);
+                Console.Write(GetHeatmapChar(ratio));
+                Console.ResetColor();
+            }
+            Console.WriteLine("\n");
+        }
+
+        private ConsoleColor GetHeatmapColor(double ratio)
+        {
+            return ratio switch
+            {
+                < 0.25 => ConsoleColor.DarkBlue,
+                < 0.5 => ConsoleColor.Blue,
+                < 0.75 => ConsoleColor.Green,
+                < 0.9 => ConsoleColor.Yellow,
+                _ => ConsoleColor.Red
+            };
+        }
+
+        private char GetHeatmapChar(double ratio)
+        {
+            return ratio switch
+            {
+                0 => ' ',
+                < 0.25 => '░',
+                < 0.5 => '▒',
+                < 0.75 => '▓',
+                _ => '█'
+            };
+        }
+
         public Core.Models.Statistics GetStatistics()
         {
             int longestCluster = 0;
@@ -177,8 +288,8 @@ namespace HashTablesLab.HashTables
             return new Core.Models.Statistics
             {
                 LoadFactor = LoadFactor,
-                LongestChain = 0, // ��� �������� ��������� �� ���������
-                ShortestChain = 0, // ��� �������� ��������� �� ���������
+                LongestChain = 0, // Для открытой адресации не применимо
+                ShortestChain = 0, // Для открытой адресации не применимо
                 EmptyBuckets = empty,
                 LongestCluster = longestCluster,
                 InsertionTime = System.TimeSpan.FromMilliseconds(_totalInsertionTimeMs),

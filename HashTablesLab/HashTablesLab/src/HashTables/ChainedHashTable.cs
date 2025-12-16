@@ -1,4 +1,4 @@
-using HashTablesLab.Core.Interfaces;
+﻿using HashTablesLab.Core.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -33,11 +33,11 @@ namespace HashTablesLab.HashTables
             if (_buckets[index] == null)
                 _buckets[index] = new LinkedList<KeyValuePair<TKey, TValue>>();
 
-            // ��������� ��������
+            // Проверяем коллизии
             if (_buckets[index].Count > 0)
                 _collisionCount++;
 
-            // �������� �� ������������ ����
+            // Проверка на существующий ключ
             foreach (var pair in _buckets[index])
             {
                 if (EqualityComparer<TKey>.Default.Equals(pair.Key, key))
@@ -74,6 +74,66 @@ namespace HashTablesLab.HashTables
 
             value = default;
             return false;
+        }
+
+        public int GetTableSize() => _buckets.Length;
+
+        public int CalculateLongestCluster()
+        {
+            // Для метода цепочек кластеры не применимы, возвращаем 0
+            return 0;
+        }
+
+        public void PrintTableState()
+        {
+            Console.WriteLine("\n═══════════════════════════════════════════════");
+            Console.WriteLine($"Хеш-таблица (цепочки) | Размер: {_buckets.Length}");
+            Console.WriteLine($"Элементов: {_count} | Заполнение: {LoadFactor:P2}");
+            Console.WriteLine("═══════════════════════════════════════════════\n");
+
+            for (int i = 0; i < _buckets.Length; i++)
+            {
+                Console.Write($"[{i,3}] → ");
+
+                if (_buckets[i] == null || _buckets[i].Count == 0)
+                {
+                    Console.WriteLine("∅");
+                }
+                else
+                {
+                    bool first = true;
+                    foreach (var pair in _buckets[i])
+                    {
+                        if (!first) Console.Write(" → ");
+                        Console.Write($"{pair.Key}");
+                        first = false;
+                    }
+                    Console.WriteLine($" ({_buckets[i].Count} элемент(ов))");
+                }
+            }
+        }
+
+        // Альтернативно - компактная визуализация
+        public void PrintCompactView(int maxBucketsToShow = 20)
+        {
+            Console.WriteLine("\n┌─────────────────────────────────────────────────────┐");
+            Console.WriteLine($"│ Хеш-таблица с цепочками ({_buckets.Length} ячеек)   │");
+            Console.WriteLine("├─────────────────────────────────────────────────────┤");
+
+            int step = Math.Max(1, _buckets.Length / maxBucketsToShow);
+
+            for (int i = 0; i < Math.Min(_buckets.Length, maxBucketsToShow); i++)
+            {
+                int idx = i * step;
+                int chainLength = _buckets[idx]?.Count ?? 0;
+
+                string bar = new string('█', Math.Min(chainLength * 2, 30));
+                string emptyIndicator = chainLength == 0 ? "[ПУСТО]" : "";
+
+                Console.WriteLine($"│ [{idx,4}] {bar,-30} {chainLength,2} элем. {emptyIndicator,-6} │");
+            }
+
+            Console.WriteLine("└─────────────────────────────────────────────────────┘");
         }
 
         public bool Delete(TKey key)
@@ -138,11 +198,11 @@ namespace HashTablesLab.HashTables
                 LongestChain = longest,
                 ShortestChain = shortest,
                 EmptyBuckets = empty,
-                LongestCluster = 0, // ��� ������ ������� �� ���������
+                LongestCluster = 0, // Для метода цепочек не применимо
                 InsertionTime = System.TimeSpan.FromMilliseconds(_totalInsertionTimeMs),
                 SearchTime = System.TimeSpan.Zero,
                 CollisionCount = _collisionCount,
-                ProbeCount = 0 // ��� ������ ������� �� ���������
+                ProbeCount = 0 // Для метода цепочек не применимо
             };
         }
 
